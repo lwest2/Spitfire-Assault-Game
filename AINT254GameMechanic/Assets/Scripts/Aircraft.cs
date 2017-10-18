@@ -13,8 +13,6 @@ public class Aircraft : MonoBehaviour {
 
     [SerializeField]
     private float torque = 5.0f;
-    [SerializeField]
-    private float torqueTurn = 5.0f;
 
     private bool flyingSpeed = false;
     private float inputValue;
@@ -54,11 +52,10 @@ public class Aircraft : MonoBehaviour {
         if (flyingSpeed)
         {
             torque = currentSpeed / 2.5f;
-
-            torqueTurn = currentSpeed / 2.5f;
+            
             // allow player to control torque
-            rb.AddRelativeTorque(torque * -inputValue, 0, torqueTurn * -inputValueTurn);
-
+            rb.AddRelativeTorque(torque * -inputValue, 0, torque * -inputValueTurn);
+            
             Debug.Log("fly");
 
 
