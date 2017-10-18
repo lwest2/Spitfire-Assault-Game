@@ -8,16 +8,19 @@ public class Aircraft : MonoBehaviour {
     private Rigidbody rb;
 
     private float currentSpeed;
-    private float minAltitudeSpeed = 50.0f;
+    private float minAltitudeSpeed = 100.0f;
     private float maxSpeed = 150.0f;
-    private float breakSpeed = 500.0f;
-    private float torque = 10.0f;
+
+    [SerializeField]
+    private float torque = 5.0f;
+    [SerializeField]
+    private float torqueTurn = 5.0f;
 
     private bool flyingSpeed = false;
     private float inputValue;
     private bool inputSpace;
     private bool inputC;
-
+    private float inputValueTurn;
 
     // acceleration and decelleration
     private float speed = 0.0f;
@@ -50,10 +53,15 @@ public class Aircraft : MonoBehaviour {
         // if min altitude speed achieved
         if (flyingSpeed)
         {
+            torque = currentSpeed / 2.5f;
+
+            torqueTurn = currentSpeed / 2.5f;
             // allow player to control torque
-            rb.AddTorque(transform.right * torque * -inputValue);
+            rb.AddRelativeTorque(torque * -inputValue, 0, torqueTurn * -inputValueTurn);
 
             Debug.Log("fly");
+
+
         }
 
         // acceleration
@@ -76,11 +84,7 @@ public class Aircraft : MonoBehaviour {
             Debug.Log("acceleration");
 
         }
-        else
-        {
-            // keep current speed at max speed
-            currentSpeed = maxSpeed;
-        }
+        
 
 
 
@@ -92,5 +96,6 @@ public class Aircraft : MonoBehaviour {
         inputValue = Input.GetAxis("Vertical");
         inputSpace = Input.GetKey(KeyCode.Space);
         inputC = Input.GetKey(KeyCode.C);
+        inputValueTurn = Input.GetAxis("Horizontal");
     }
 }
