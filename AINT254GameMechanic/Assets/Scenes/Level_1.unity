@@ -246,7 +246,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 1.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &301920622
 MeshFilter:
@@ -382,7 +382,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0.03
   m_AngularDrag: 20
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -469,7 +469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f5c6ae4a84d4e4d85288692a8d08a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torque: 10
 --- !u!1 &1701234347
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +482,7 @@ GameObject:
   - component: {fileID: 1701234350}
   - component: {fileID: 1701234349}
   - component: {fileID: 1701234348}
+  - component: {fileID: 1701234354}
   m_Layer: 0
   m_Name: Runway
   m_TagString: Untagged
@@ -583,6 +583,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &1701234354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1701234347}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.999999, y: 0.016942816, z: 10.077467}
+  m_Center: {x: 3.1881836e-19, y: 0.0061355066, z: 0.038733006}
 --- !u!1 &1849336130
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +623,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1849336130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 14.6, z: -4.0600004}
+  m_LocalPosition: {x: 0, y: 5, z: -4.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 916282203}
