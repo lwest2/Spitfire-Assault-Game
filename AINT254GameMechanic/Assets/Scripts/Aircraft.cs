@@ -11,31 +11,27 @@ public class Aircraft : MonoBehaviour {
 
     // checks (speed)
     private float currentSpeed;
-    private bool flyingSpeed = false;
-    private float minAltitudeSpeed = 100.0f;
-    
     
     // input
-    private float inputValue;
-    private bool inputSpace;
-    private bool inputC;
-    private float inputValueTurn;
     private float inputYaw;
+    private float inputPitch;
+    private float inputRoll;
+    private float inputDeceleration;
+    private float inputAcceleration;
 
     // acceleration and decelleration
-    private float speed = 0.0f;
+    private float speed = 7.0f;
     private float timeZeroToMax = 15f;
     private float accRatePerSec;
-    private float maxSpeed = 150.0f;
-    private float rotationSpeed = 50.0f;
+    private float maxSpeed = 30.0f;
+    private float rotationSpeed = 30.0f;
 
     //yaw, pitch, roll
     private Quaternion AddRot = Quaternion.identity;
     private float roll = 0;
     private float pitch = 0;
     private float yaw = 0;
-    private Quaternion lastRot = Quaternion.identity;
-
+    
     // Use this for initialization
     void Start () {
         accRatePerSec = maxSpeed / timeZeroToMax;
@@ -46,83 +42,49 @@ public class Aircraft : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        lastRot = transform.rotation;
         currentSpeed = rb.velocity.magnitude;
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
 
-        if (currentSpeed >= minAltitudeSpeed)
-        {
-            flyingSpeed = true;
-        }
-        else
-        {
-            flyingSpeed = false;
-        }
+        
 
-        // if min altitude speed achieved
-        if (flyingSpeed)
+        if (SwitchCamera.m_cameraSwitcher)
         {
-           
-            roll = inputValueTurn * (Time.deltaTime * rotationSpeed);
-            pitch = inputValue * (Time.deltaTime * rotationSpeed);
+            pitch = inputPitch * (Time.deltaTime * rotationSpeed);
             yaw = inputYaw * (Time.deltaTime * rotationSpeed);
+            roll = inputRoll * (Time.deltaTime * rotationSpeed);
+        }
+    
 
-            Debug.Log("fly");
+        if (currentSpeed < maxSpeed)
+        {
+            //Debug.Log("Acceleration");
+            speed += inputAcceleration * (accRatePerSec * Time.deltaTime);
         }
 
-        else
+        if (currentSpeed > 5)
         {
-            yaw = inputYaw * (Time.deltaTime * rotationSpeed);
-        }
-
-        // acceleration
-        if (inputSpace)
-        {
-            speed += accRatePerSec * Time.deltaTime;
+            //Debug.Log("Deceleration");
+            speed -= inputDeceleration * (accRatePerSec * Time.deltaTime);
         }
         
-        // decelleration
-        if (inputC)
-        {
-            speed -= accRatePerSec * Time.deltaTime;
-        }
 
-        // if current speed is less than max speed
-        if (currentSpeed <= maxSpeed)
-        {
-            // add velocity
-            rb.velocity = transform.forward * speed;
-            Debug.Log("acceleration");
+        
+        rb.velocity = transform.forward * speed;
 
-        }
-
-        AddRot.eulerAngles = new Vector3(-pitch, yaw, -roll);
+        AddRot.eulerAngles = new Vector3(pitch, yaw, -roll);
         rb.rotation *= AddRot;
-
-
+        
 
     }
 
     private void Update()
-    {
-        inputValue = Input.GetAxis("Vertical");
-        inputSpace = Input.GetKey(KeyCode.Space);
-        inputC = Input.GetKey(KeyCode.C);
-        inputValueTurn = Input.GetAxis("Horizontal");
+    {       
         inputYaw = Input.GetAxis("yaw");
+        inputPitch = Input.GetAxis("pitch");
+        inputRoll = Input.GetAxis("roll");
+        inputDeceleration = Input.GetAxis("left trigger");
+        inputAcceleration = Input.GetAxis("right trigger");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        flyingSpeed = false;
-        rb.rotation = transform.rotation = Quaternion.Euler(new Vector3(lastRot.x, 0, lastRot.z));
-        Debug.Log("Landing");
-        if (rb.velocity.magnitude > 90)
-        {
-            speed = 89;
-            Debug.Log("Slowing: " + speed);
-        }
-        
 
-    }
 }
