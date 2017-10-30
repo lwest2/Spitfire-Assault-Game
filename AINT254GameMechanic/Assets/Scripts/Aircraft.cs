@@ -6,6 +6,7 @@ public class Aircraft : MonoBehaviour {
 
     // references: https://keithmaggio.wordpress.com/2011/07/01/unity-3d-code-snippet-flight-script/
     // http://answers.unity3d.com/questions/554291/finding-a-rigidbodys-rotation-speed-and-direction.html
+    // http://answers.unity3d.com/questions/10425/how-to-stabilize-angular-motion-alignment-of-hover.html
 
     private Rigidbody rb;
 
@@ -16,8 +17,8 @@ public class Aircraft : MonoBehaviour {
     private float inputYaw;
     private float inputPitch;
     private float inputRoll;
-    private float inputDeceleration;
-    private float inputAcceleration;
+    private bool inputDeceleration;
+    private bool inputAcceleration;
 
     // acceleration and decelleration
     private float speed = 7.0f;
@@ -53,27 +54,39 @@ public class Aircraft : MonoBehaviour {
             yaw = inputYaw * (Time.deltaTime * rotationSpeed);
             roll = inputRoll * (Time.deltaTime * rotationSpeed);
         }
-    
 
         if (currentSpeed < maxSpeed)
         {
-            //Debug.Log("Acceleration");
-            speed += inputAcceleration * (accRatePerSec * Time.deltaTime);
+            if (inputAcceleration)
+            { 
+            Debug.Log("Acceleration");
+            speed += accRatePerSec * Time.deltaTime;
+            }
         }
 
         if (currentSpeed > 5)
         {
-            //Debug.Log("Deceleration");
-            speed -= inputDeceleration * (accRatePerSec * Time.deltaTime);
+            if (inputDeceleration)
+            {
+                Debug.Log("Deceleration");
+                speed -= accRatePerSec * Time.deltaTime;
+            }
         }
-        
 
-        
+        if (inputRoll == 0)
+        {
+            Vector3 predictUp = Quaternion.AngleAxis(rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 1.0f, rb.angularVelocity) * transform.up;
+
+            Vector3 torqueVector = Vector3.Cross(predictUp, Vector3.up);
+            torqueVector = Vector3.Project(torqueVector, transform.forward);
+            rb.AddTorque(torqueVector * 1.0f * 1.0f);
+        }
+
         rb.velocity = transform.forward * speed;
 
         AddRot.eulerAngles = new Vector3(pitch, yaw, -roll);
         rb.rotation *= AddRot;
-        
+
 
     }
 
@@ -82,8 +95,8 @@ public class Aircraft : MonoBehaviour {
         inputYaw = Input.GetAxis("yaw");
         inputPitch = Input.GetAxis("pitch");
         inputRoll = Input.GetAxis("roll");
-        inputDeceleration = Input.GetAxis("left trigger");
-        inputAcceleration = Input.GetAxis("right trigger");
+        inputDeceleration = Input.GetKey("joystick button 4");
+        inputAcceleration = Input.GetKey("joystick button 5");
     }
 
 

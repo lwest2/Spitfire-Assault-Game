@@ -14,6 +14,7 @@ public class FireProjectile : MonoBehaviour {
         m_transform = GetComponent<Transform>();
        
         Destroy(gameObject, 5.0f);
+        
 	}
 
     void FixedUpdate()
@@ -26,7 +27,7 @@ public class FireProjectile : MonoBehaviour {
         if (collision.collider.tag == "Player")
         {
             Destroy(gameObject);
-            Debug.Log("HITT Deduct health here: FireProjectile");
+            Debug.Log("HIT Deduct health here: FireProjectile");
         }
     }
 }
