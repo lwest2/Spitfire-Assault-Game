@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 8840472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57, y: 0, z: 1.9700049}
+  m_LocalPosition: {x: -0.57, y: 0, z: 2.64}
   m_LocalScale: {x: -0.60655737, y: 0.7212888, z: -38.816574}
   m_Children: []
   m_Father: {fileID: 536147943}
@@ -331,6 +331,52 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.91, y: -0.1, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1043328957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1043328959}
+  - component: {fileID: 1043328958}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1043328958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043328957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627d57eacf3d4704ea494cac7ffa4767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - Bullet
+  pooledObjects:
+  - {fileID: 1313604122117274, guid: ba285a586a28f75438a1030a85068451, type: 2}
+  poolAmounts: 32000000
+  tempList: []
+--- !u!4 &1043328959
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1043328957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.26289, y: 0.6773453, z: -19.607918}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197935210
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +427,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1405191718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.53, y: 0, z: 1.97}
+  m_LocalPosition: {x: 0.53, y: 0, z: 2.6399982}
   m_LocalScale: {x: -0.60655737, y: 0.72125006, z: -38.81657}
   m_Children: []
   m_Father: {fileID: 536147943}

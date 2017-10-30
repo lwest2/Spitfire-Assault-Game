@@ -32,7 +32,7 @@ public class Aircraft : MonoBehaviour {
     private float roll = 0;
     private float pitch = 0;
     private float yaw = 0;
-    
+    private float roll2 = 0;
     // Use this for initialization
     void Start () {
         accRatePerSec = maxSpeed / timeZeroToMax;
@@ -52,7 +52,9 @@ public class Aircraft : MonoBehaviour {
         {
             pitch = inputPitch * (Time.deltaTime * rotationSpeed);
             yaw = inputYaw * (Time.deltaTime * rotationSpeed);
-            roll = inputRoll * (Time.deltaTime * rotationSpeed);
+            roll = inputYaw * (Time.deltaTime * rotationSpeed);
+
+            roll2 = inputRoll * (Time.deltaTime * rotationSpeed);
         }
 
         if (currentSpeed < maxSpeed)
@@ -75,16 +77,19 @@ public class Aircraft : MonoBehaviour {
 
         if (inputRoll == 0)
         {
+            // predict the up transformation
             Vector3 predictUp = Quaternion.AngleAxis(rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 1.0f, rb.angularVelocity) * transform.up;
 
+            // get the cross vector between the predicted up transformation and the current up transformation
             Vector3 torqueVector = Vector3.Cross(predictUp, Vector3.up);
-            torqueVector = Vector3.Project(torqueVector, transform.forward);
+            // add torque
             rb.AddTorque(torqueVector * 1.0f * 1.0f);
         }
 
         rb.velocity = transform.forward * speed;
 
-        AddRot.eulerAngles = new Vector3(pitch, yaw, -roll);
+        AddRot.eulerAngles = new Vector3(pitch, yaw, -roll + -roll2);
+
         rb.rotation *= AddRot;
 
 

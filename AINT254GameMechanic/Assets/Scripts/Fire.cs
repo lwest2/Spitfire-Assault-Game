@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour {
 
-
+    
     private float m_inputB_bomb;
     private float m_inputB_bullet;
 
@@ -26,10 +26,7 @@ public class Fire : MonoBehaviour {
     private bool m_allowFire = true;
     private bool m_allowBombs = true;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
+    
 	
 	// Update is called once per frame
 	void Update () {
@@ -51,6 +48,7 @@ public class Fire : MonoBehaviour {
     IEnumerator Bullets()
     {
         m_allowFire = false;
+
         Instantiate(m_bulletPrefab, m_bulletSpawn.position, m_bulletSpawn.rotation);
         yield return new WaitForSecondsRealtime(0.05f);
         Instantiate(m_bulletPrefab, m_bulletSpawn_2.position, m_bulletSpawn_2.rotation);

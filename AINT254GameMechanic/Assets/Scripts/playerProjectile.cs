@@ -8,13 +8,17 @@ public class playerProjectile : MonoBehaviour {
     private Rigidbody m_rb;
     private Transform m_transform;
 
+    void OnEnable()
+    {
+        Invoke("Die", 4.0f);  
+    }
+
     // Use this for initialization
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
         m_transform = GetComponent<Transform>();
-
-        Destroy(gameObject, 10.0f);
+       
     }
 
     void FixedUpdate()
@@ -26,7 +30,17 @@ public class playerProjectile : MonoBehaviour {
     {
         if (other.collider.tag == "Map")
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke("Die");
     }
 }
