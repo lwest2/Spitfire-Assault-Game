@@ -8,6 +8,9 @@ public class playerProjectile : MonoBehaviour {
     private Rigidbody m_rb;
     private Transform m_transform;
 
+    [SerializeField]
+    private TurretTakeDamage m_turretBehaviour;
+
     void OnEnable()
     {
         Invoke("Die", 4.0f);  
@@ -18,7 +21,7 @@ public class playerProjectile : MonoBehaviour {
     {
         m_rb = GetComponent<Rigidbody>();
         m_transform = GetComponent<Transform>();
-       
+        
     }
 
     void FixedUpdate()
@@ -32,8 +35,19 @@ public class playerProjectile : MonoBehaviour {
         {
             Die();
         }
+
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            //TurretTakeDamage.turretBehaviour.setEnemyHealth(-1.0f);
+            m_turretBehaviour = other.gameObject.GetComponent<TurretTakeDamage>();
+            m_turretBehaviour.setEnemyHealth(-1.0f);
+            Debug.Log("turret hit");
+        }
+    }
     void Die()
     {
         Destroy(gameObject);

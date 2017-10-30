@@ -7,6 +7,7 @@ public class FireProjectile : MonoBehaviour {
     private float force = 7.0f;
     private Rigidbody m_rb;
     private Transform m_transform;
+    playerGUIhelper playergui;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class FireProjectile : MonoBehaviour {
         {
             Destroy(gameObject);
             Debug.Log("HIT Deduct health here: FireProjectile");
+            playerGUIhelper.playergui.setPlayerHealth(-5.0f);
         }
     }
 }

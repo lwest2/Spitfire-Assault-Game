@@ -8,100 +8,104 @@ public class Aircraft : MonoBehaviour {
     // http://answers.unity3d.com/questions/554291/finding-a-rigidbodys-rotation-speed-and-direction.html
     // http://answers.unity3d.com/questions/10425/how-to-stabilize-angular-motion-alignment-of-hover.html
 
-    private Rigidbody rb;
+    private Rigidbody m_rb;
 
     // checks (speed)
-    private float currentSpeed;
+    private float m_currentSpeed;
     
     // input
-    private float inputYaw;
-    private float inputPitch;
-    private float inputRoll;
-    private bool inputDeceleration;
-    private bool inputAcceleration;
+    private float m_inputYaw;
+    private float m_inputPitch;
+    private float m_inputRoll;
+    private bool m_inputDeceleration;
+    private bool m_inputAcceleration;
 
     // acceleration and decelleration
-    private float speed = 7.0f;
-    private float timeZeroToMax = 15f;
-    private float accRatePerSec;
-    private float maxSpeed = 30.0f;
-    private float rotationSpeed = 30.0f;
+    private float m_speed = 7.0f;
+    private float m_timeZeroToMax = 15f;
+    private float m_accRatePerSec;
+    private float m_maxSpeed = 30.0f;
+    private float m_rotationSpeed = 30.0f;
 
     //yaw, pitch, roll
-    private Quaternion AddRot = Quaternion.identity;
-    private float roll = 0;
-    private float pitch = 0;
-    private float yaw = 0;
-    private float roll2 = 0;
+    private Quaternion m_AddRot = Quaternion.identity;
+    private float m_roll = 0;
+    private float m_pitch = 0;
+    private float m_yaw = 0;
+    private float m_roll2 = 0;
+
+    private Vector3 m_predictUp;
+    private Vector3 m_torqueVector;
+
     // Use this for initialization
     void Start () {
-        accRatePerSec = maxSpeed / timeZeroToMax;
+        m_accRatePerSec = m_maxSpeed / m_timeZeroToMax;
 
-        rb = GetComponent<Rigidbody>();
+        m_rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        currentSpeed = rb.velocity.magnitude;
-        //Debug.Log(rb.velocity.magnitude);
+        m_currentSpeed = m_rb.velocity.magnitude;
+        //Debug.Log(m_rb.velocity.magnitude);
 
         
 
         if (SwitchCamera.m_cameraSwitcher)
         {
-            pitch = inputPitch * (Time.deltaTime * rotationSpeed);
-            yaw = inputYaw * (Time.deltaTime * rotationSpeed);
-            roll = inputYaw * (Time.deltaTime * rotationSpeed);
+            m_pitch = m_inputPitch * (Time.deltaTime * m_rotationSpeed);
+            m_yaw = m_inputYaw * (Time.deltaTime * m_rotationSpeed);
+            m_roll = m_inputYaw * (Time.deltaTime * m_rotationSpeed);
 
-            roll2 = inputRoll * (Time.deltaTime * rotationSpeed);
+            m_roll2 = m_inputRoll * (Time.deltaTime * m_rotationSpeed);
         }
 
-        if (currentSpeed < maxSpeed)
+        if (m_currentSpeed < m_maxSpeed)
         {
-            if (inputAcceleration)
+            if (m_inputAcceleration)
             { 
             Debug.Log("Acceleration");
-            speed += accRatePerSec * Time.deltaTime;
+            m_speed += m_accRatePerSec * Time.deltaTime;
             }
         }
 
-        if (currentSpeed > 5)
+        if (m_currentSpeed > 5)
         {
-            if (inputDeceleration)
+            if (m_inputDeceleration)
             {
                 Debug.Log("Deceleration");
-                speed -= accRatePerSec * Time.deltaTime;
+                m_speed -= m_accRatePerSec * Time.deltaTime;
             }
         }
 
-        if (inputRoll == 0)
+        if (m_inputRoll == 0)
         {
             // predict the up transformation
-            Vector3 predictUp = Quaternion.AngleAxis(rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 1.0f, rb.angularVelocity) * transform.up;
+            m_predictUp = Quaternion.AngleAxis(m_rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 1.0f, m_rb.angularVelocity) * transform.up;
 
             // get the cross vector between the predicted up transformation and the current up transformation
-            Vector3 torqueVector = Vector3.Cross(predictUp, Vector3.up);
+            m_torqueVector = Vector3.Cross(m_predictUp, Vector3.up);
             // add torque
-            rb.AddTorque(torqueVector * 1.0f * 1.0f);
+            m_rb.AddTorque(m_torqueVector * 1.0f * 1.0f);
         }
 
-        rb.velocity = transform.forward * speed;
+        m_rb.velocity = transform.forward * m_speed;
 
-        AddRot.eulerAngles = new Vector3(pitch, yaw, -roll + -roll2);
+        m_AddRot.eulerAngles = new Vector3(m_pitch, m_yaw, -m_roll + -m_roll2);
 
-        rb.rotation *= AddRot;
+        m_rb.rotation *= m_AddRot;
 
 
     }
 
     private void Update()
     {       
-        inputYaw = Input.GetAxis("yaw");
-        inputPitch = Input.GetAxis("pitch");
-        inputRoll = Input.GetAxis("roll");
-        inputDeceleration = Input.GetKey("joystick button 4");
-        inputAcceleration = Input.GetKey("joystick button 5");
+        m_inputYaw = Input.GetAxis("yaw");
+        m_inputPitch = Input.GetAxis("pitch");
+        m_inputRoll = Input.GetAxis("roll");
+        m_inputDeceleration = Input.GetKey("joystick button 4");
+        m_inputAcceleration = Input.GetKey("joystick button 5");
     }
 
 

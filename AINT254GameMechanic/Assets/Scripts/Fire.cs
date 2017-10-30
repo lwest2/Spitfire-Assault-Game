@@ -26,7 +26,7 @@ public class Fire : MonoBehaviour {
     private bool m_allowFire = true;
     private bool m_allowBombs = true;
 
-    
+    private float m_numBombs;
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,7 +34,9 @@ public class Fire : MonoBehaviour {
         m_inputB_bomb = Input.GetAxis("left trigger");
         m_inputB_bullet = Input.GetAxis("right trigger");
 
-        if (m_inputB_bomb == 1 && !SwitchCamera.m_cameraSwitcher && m_allowBombs)
+        m_numBombs = playerGUIhelper.playergui.getPlayerBombs();
+
+        if (m_inputB_bomb == 1 && !SwitchCamera.m_cameraSwitcher && m_allowBombs && m_numBombs > 0)
         {
             StartCoroutine(Bombs());
         }
@@ -60,6 +62,7 @@ public class Fire : MonoBehaviour {
     {
         m_allowBombs = false;
         Instantiate(m_bombPrefab, m_bombSpawn.position, m_bombSpawn.rotation);
+        playerGUIhelper.playergui.setPlayerBombs(-1.0f);
         yield return new WaitForSecondsRealtime(1.0f);
         m_allowBombs = true;
     }
