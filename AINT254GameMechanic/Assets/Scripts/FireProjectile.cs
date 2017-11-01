@@ -4,32 +4,35 @@ using UnityEngine;
 
 public class FireProjectile : MonoBehaviour {
 
-    private float force = 7.0f;
+    // force for enemy projectile
+    private float m_force = 50.0f;
     private Rigidbody m_rb;
-    private Transform m_transform;
     playerGUIhelper playergui;
 
 	// Use this for initialization
 	void Start () {
         m_rb = GetComponent<Rigidbody>();
-        m_transform = GetComponent<Transform>();
-       
-        Destroy(gameObject, 5.0f);
         
-	}
+        // destroy enemy projectile within 7 seconds
+        Destroy(gameObject, 7.0f);
+    }
 
     void FixedUpdate()
-    {       
-        m_rb.AddForce(m_transform.forward * force, ForceMode.Impulse);
+    {
+        // add constant velocity
+        m_rb.velocity = transform.forward * m_force;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // if collides with player
         if (collision.collider.tag == "Player")
         {
+            // destroy projectile
             Destroy(gameObject);
-            Debug.Log("HIT Deduct health here: FireProjectile");
+            // deduct players health
             playerGUIhelper.playergui.setPlayerHealth(-5.0f);
         }
     }
+    
 }

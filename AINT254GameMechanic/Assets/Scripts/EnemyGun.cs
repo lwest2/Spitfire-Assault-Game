@@ -4,31 +4,51 @@ using UnityEngine;
 
 public class EnemyGun : MonoBehaviour {
     
+    // get transform for gun
     private Transform m_transform;
     
-
+    // get target for gun to aim at
     [SerializeField]
     private GameObject m_target;
 
+    // get enemy projectile
     [SerializeField]
     private GameObject m_bulletPrefab;
 
+    // get turret projectile spawn point
     [SerializeField]
     private Transform m_bulletSpawn;
     
     // Use this for initialization
     void Start () {
         m_transform = transform;
-        InvokeRepeating("Fire", 1.0f, 3.0f);
+
+        // if target is available
+        if (m_target)
+        {
+            // invoke the repeating fire
+            InvokeRepeating("Fire", 1.0f, 3.0f);
+        }
+        else
+        {
+            // cancel invoke
+            CancelInvoke("Fire");
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        m_transform.LookAt(m_target.transform.position);
+        // if target is available
+        if (m_target)
+        {
+            // rotate turret to look at target
+            m_transform.LookAt(m_target.transform.position);
+        }
     }
 
     void Fire()
     {
+        // instantiate enemy projectile
         Instantiate(m_bulletPrefab, m_bulletSpawn.position + transform.forward * 5, m_bulletSpawn.rotation);
     }
 }
