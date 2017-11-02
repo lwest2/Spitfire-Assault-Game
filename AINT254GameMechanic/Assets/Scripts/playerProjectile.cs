@@ -59,7 +59,7 @@ public class playerProjectile : MonoBehaviour {
         if (other.collider.tag == "Crate")
         {
             // give bomb
-            playerGUIhelper.playergui.setPlayerBombs(1.0f);
+            playerGUIhelper.playergui.addPlayerBombs(1.0f);
             // if player health is less or equal to 95
             if (playerGUIhelper.playergui.getPlayerHealth() <= 95)
             {

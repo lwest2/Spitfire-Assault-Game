@@ -98,7 +98,7 @@ public class Aircraft : MonoBehaviour {
         m_rb.velocity = transform.forward * m_speed;
 
         // create euler angles from the inputs
-        m_AddRot.eulerAngles = new Vector3(m_pitch, m_yaw, -m_roll + -m_roll2);
+        m_AddRot.eulerAngles = new Vector3(-m_pitch, m_yaw, -m_roll + -m_roll2);
 
         // add rotation to rigidbody
         m_rb.rotation *= m_AddRot;

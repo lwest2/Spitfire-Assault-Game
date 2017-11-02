@@ -95,6 +95,16 @@ public class playerGUIhelper : MonoBehaviour {
         }
     }
 
+    public void addPlayerBombs(float value)
+    {
+        if(m_playerBombs >= 0)
+        {
+            m_playerBombs += value;
+
+            m_bombText.text = "Bombs: " + m_playerBombs.ToString();
+        }
+    }
+
     public float getPlayerBombs()
     {
         return m_playerBombs;
