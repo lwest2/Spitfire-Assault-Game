@@ -60,6 +60,12 @@ public class playerProjectile : MonoBehaviour {
         {
             // give bomb
             playerGUIhelper.playergui.setPlayerBombs(1.0f);
+            // if player health is less or equal to 95
+            if (playerGUIhelper.playergui.getPlayerHealth() <= 95)
+            {
+                // add 5 health points
+                playerGUIhelper.playergui.setPlayerHealth(5.0f);
+            }
             // destroy crate
             Destroy(other.gameObject);
         }

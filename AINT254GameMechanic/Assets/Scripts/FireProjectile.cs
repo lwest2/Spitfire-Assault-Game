@@ -31,7 +31,7 @@ public class FireProjectile : MonoBehaviour {
             // destroy projectile
             Destroy(gameObject);
             // deduct players health
-            playerGUIhelper.playergui.setPlayerHealth(-5.0f);
+            playerGUIhelper.playergui.setPlayerHealth(-10.0f);
         }
     }
     

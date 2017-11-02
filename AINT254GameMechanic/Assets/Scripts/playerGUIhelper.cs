@@ -9,7 +9,7 @@ public class playerGUIhelper : MonoBehaviour {
 
     private float m_playerHealth = 100;     // player health to 100
     private float m_playerBombs = 3;        // player bombs to 3
-    private float m_playerObjectives = 3;   // player objects to 3
+    private float m_playerObjectives = 4;   // player objects to 3
     public static playerGUIhelper playergui;    // make this script available to other scripts
     
     [SerializeField]
@@ -70,6 +70,11 @@ public class playerGUIhelper : MonoBehaviour {
         Debug.Log(m_playerHealth);
     }
 
+    public float getPlayerHealth()
+    {
+        return m_playerHealth;
+    }
+
     void Death()
     {
         // is dead is equal to true
@@ -111,4 +116,5 @@ public class playerGUIhelper : MonoBehaviour {
             SceneManager.LoadScene(4);
         }
     }
+
 }
