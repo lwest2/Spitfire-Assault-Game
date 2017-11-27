@@ -9,6 +9,7 @@ public class Aircraft : MonoBehaviour {
     // http://answers.unity3d.com/questions/10425/how-to-stabilize-angular-motion-alignment-of-hover.html
 
     private Rigidbody m_rb;             // rigidbody for aircraft
+    private Animator m_anim;
 
     // checks (speed)
     private float m_currentSpeed;       // current speed for speed checks
@@ -21,7 +22,7 @@ public class Aircraft : MonoBehaviour {
     private bool m_inputAcceleration;   // input for acceleration
 
     // acceleration and decelleration
-    private float m_speed = 11.0f;          // starting speed
+    private float m_speed = 20.0f;          // starting speed
     private float m_timeZeroToMax = 15f;    // how long it will take to reach max speed with acceleration
     private float m_accRatePerSec;          // the acceleration
     private float m_maxSpeed = 30.0f;       // max velocity
@@ -42,6 +43,7 @@ public class Aircraft : MonoBehaviour {
         m_accRatePerSec = m_maxSpeed / m_timeZeroToMax; // gets acceleration velocitys
 
         m_rb = GetComponent<Rigidbody>();
+        m_anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -72,7 +74,7 @@ public class Aircraft : MonoBehaviour {
         }
 
         // if current speed is above 10
-        if (m_currentSpeed > 10)
+        if (m_currentSpeed > 19)
         {
             // if there is input for deceleration
             if (m_inputDeceleration)
@@ -87,7 +89,7 @@ public class Aircraft : MonoBehaviour {
         if (m_inputRoll == 0)
         {
             // predict the up transform
-            m_predictUp = Quaternion.AngleAxis(m_rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 1.0f, m_rb.angularVelocity) * transform.up;
+            m_predictUp = Quaternion.AngleAxis(m_rb.angularVelocity.magnitude * Mathf.Rad2Deg * 0.6f / 3.0f, m_rb.angularVelocity) * transform.up;
             // get the cross vector between the predicted up transformation and the current up transformation
             m_torqueVector = Vector3.Cross(m_predictUp, Vector3.up);
             // add torque
@@ -98,12 +100,50 @@ public class Aircraft : MonoBehaviour {
         m_rb.velocity = transform.forward * m_speed;
 
         // create euler angles from the inputs
-        m_AddRot.eulerAngles = new Vector3(-m_pitch, m_yaw, -m_roll + -m_roll2);
+        m_AddRot.eulerAngles = new Vector3(-m_pitch, -m_yaw, m_roll + m_roll2);
 
         // add rotation to rigidbody
         m_rb.rotation *= m_AddRot;
 
+        if (m_inputPitch > 0)
+        {
+            m_anim.SetBool("Elevate", true);
+            m_anim.SetFloat("Pitch", 1.0f);
 
+        }
+        else
+        {
+            m_anim.SetBool("Elevate", false);
+        }
+
+
+        if (m_inputPitch < 0)
+        {
+            m_anim.SetBool("Deelevate", true);
+        }
+        else
+        {
+            m_anim.SetBool("Deelevate", false);
+        }
+
+        
+        if (m_inputYaw > 0)
+        {
+            m_anim.SetBool("Roll_left", true);
+        }
+        else
+        {
+            m_anim.SetBool("Roll_left", false);
+        }
+
+        if(m_inputYaw < 0)
+        {
+            m_anim.SetBool("Roll_right", true);
+        }
+        else
+        {
+            m_anim.SetBool("Roll_right", false);
+        }
     }
 
     private void Update()
@@ -114,6 +154,8 @@ public class Aircraft : MonoBehaviour {
         m_inputRoll = Input.GetAxis("roll");
         m_inputDeceleration = Input.GetKey("joystick button 4");
         m_inputAcceleration = Input.GetKey("joystick button 5");
+
+
     }
 
 
