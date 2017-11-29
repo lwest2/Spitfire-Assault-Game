@@ -38,12 +38,18 @@ public class Aircraft : MonoBehaviour {
     private Vector3 m_predictUp;    // prediction of the up vector
     private Vector3 m_torqueVector; // how much torque should be added
 
+ 
+
     // Use this for initialization
     void Start () {
+        
+
         m_accRatePerSec = m_maxSpeed / m_timeZeroToMax; // gets acceleration velocitys
 
         m_rb = GetComponent<Rigidbody>();
         m_anim = GetComponent<Animator>();
+
+        
 	}
 	
 	// Update is called once per frame
@@ -108,7 +114,6 @@ public class Aircraft : MonoBehaviour {
         if (m_inputPitch > 0)
         {
             m_anim.SetBool("Elevate", true);
-            m_anim.SetFloat("Pitch", 1.0f);
 
         }
         else
