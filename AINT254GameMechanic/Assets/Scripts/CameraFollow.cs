@@ -8,12 +8,10 @@ public class CameraFollow : MonoBehaviour
 {
     // references: https://gist.github.com/ftvs/5822103
 
-
     private Camera m_cameraFOV;
 
     private float m_inputPitch; // input for pitch
-    private bool m_inputDeceleration;   // input for deceleration
-    private bool m_inputAcceleration;   // input for acceleration
+    private float m_inputAcceleration;   // input for acceleration
 
     // How long the object should shake for.
     private float m_shakeDuration = 0f;
@@ -25,6 +23,7 @@ public class CameraFollow : MonoBehaviour
     // field of view
     private float m_fieldOfView = 5.0f;
     private float m_initialFOV;
+    private float m_maxFOV = 80.0f;
 
     // The target we are following
     public Transform target;
@@ -38,6 +37,8 @@ public class CameraFollow : MonoBehaviour
 
     // Place the script in the Camera-Control group in the component menu
     [AddComponentMenu("Camera-Control/Smooth Follow")]
+
+    
 
     // Place the script in the Camera-Control group in the component menu
     private void Start()
@@ -79,37 +80,43 @@ public class CameraFollow : MonoBehaviour
         transform.LookAt(target);
 
         // shake camera
-        if (m_inputPitch < -0.5)
-        {
-            ShakeCamera();
-        }
-        else if (m_cameraFOV.fieldOfView > m_initialFOV)
-        { 
-            m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView - m_fieldOfView * Time.deltaTime;
-        }
-
-        if (m_inputAcceleration)
-        {
-            ShakeCamera();
-        }
+        ShakeCamera();
     }
 
     void Update()
     {
         m_inputPitch = Input.GetAxis("pitch");
-        m_inputDeceleration = Input.GetKey("joystick button 4");
-        m_inputAcceleration = Input.GetKey("joystick button 5");
+        m_inputAcceleration = Input.GetAxis("acceleration");
     }
 
     void ShakeCamera()
     {
-        transform.position = transform.position + Random.insideUnitSphere * m_shakeAmount;
-
-        m_shakeDuration += Time.deltaTime * m_decreaseFactor;
-
-        if (m_cameraFOV.fieldOfView < 80)
+        if (m_inputPitch < -0.9 || m_inputAcceleration < -0.9)
         {
-            m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView + m_fieldOfView * Time.deltaTime;
+            if (m_cameraFOV.fieldOfView < m_maxFOV)
+            {
+                transform.position = transform.position + Random.insideUnitSphere * m_shakeAmount;
+
+                m_shakeDuration += Time.deltaTime * m_decreaseFactor;
+                ChangeFOV();
+            }
+        }
+        else
+        {
+            InitialFOV();
+        }
+    }
+
+    void ChangeFOV()
+    {
+        m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView + m_fieldOfView * Time.deltaTime;
+    }
+
+    void InitialFOV()
+    {
+        if (m_cameraFOV.fieldOfView > m_initialFOV)
+        {
+            m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView - m_fieldOfView * Time.deltaTime;
         }
     }
 }
