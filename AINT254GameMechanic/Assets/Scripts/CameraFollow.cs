@@ -11,7 +11,6 @@ public class CameraFollow : MonoBehaviour
     private Camera m_cameraFOV;
 
     private float m_inputPitch; // input for pitch
-    private float m_inputAcceleration;   // input for acceleration
 
     // How long the object should shake for.
     private float m_shakeDuration = 0f;
@@ -37,8 +36,9 @@ public class CameraFollow : MonoBehaviour
 
     // Place the script in the Camera-Control group in the component menu
     [AddComponentMenu("Camera-Control/Smooth Follow")]
-
     
+    [SerializeField]
+    private Aircraft aircraftScript;
 
     // Place the script in the Camera-Control group in the component menu
     private void Start()
@@ -86,12 +86,11 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         m_inputPitch = Input.GetAxis("pitch");
-        m_inputAcceleration = Input.GetAxis("acceleration");
     }
 
     void ShakeCamera()
     {
-        if (m_inputPitch < -0.9 || m_inputAcceleration < -0.9)
+        if (m_inputPitch < -0.9 || aircraftScript.getComplete())
         {
             if (m_cameraFOV.fieldOfView < m_maxFOV)
             {

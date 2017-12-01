@@ -16,7 +16,7 @@ public class Aircraft : MonoBehaviour {
     private float m_inputYaw;           // input for yaw
     private float m_inputPitch;         // input for pitch
     private float m_inputRoll;          // input for roll
-    private float m_inputAcceleration;   // input for acceleration
+    private bool m_inputAcceleration;   // input for acceleration
 
     // acceleration and decelleration
     private float m_speed = 25.0f;          // starting speed
@@ -26,8 +26,10 @@ public class Aircraft : MonoBehaviour {
     private float m_initialSpeed;
 
     // boost
-    private float m_speedBoost = 0.025f;
+    private float m_speedBoost = 1f;
+    private float m_speedBoostMax = 40f;
     private bool hasComplete = false;
+    private bool hasCompleteDe = false;
 
     //yaw, pitch, roll
     private Quaternion m_AddRot = Quaternion.identity;  // rotation to add
@@ -39,9 +41,14 @@ public class Aircraft : MonoBehaviour {
     private Vector3 m_predictUp;    // prediction of the up vector
     private Vector3 m_torqueVector; // how much torque should be added   
 
-    public float getSpeed()
+    public bool getComplete()
     {
-        return m_speed;
+        return hasComplete;
+    }
+
+    public bool getCompleteDe()
+    {
+        return hasCompleteDe;
     }
 
     // Use this for initialization
@@ -65,7 +72,7 @@ public class Aircraft : MonoBehaviour {
         // inputs for xbox controls
         m_inputYaw = Input.GetAxis("yaw");
         m_inputPitch = Input.GetAxis("pitch");
-        m_inputAcceleration = Input.GetAxis("acceleration");
+        m_inputAcceleration = Input.GetButtonDown("a button");
     }
 
     void Fly()
@@ -86,7 +93,7 @@ public class Aircraft : MonoBehaviour {
             m_rb.AddTorque(m_torqueVector * 1.0f * 1.0f);
         }
 
-        if (m_inputPitch < -0.9 || m_inputAcceleration < -0.9)
+        if (m_inputPitch < -0.9)
         {
             Accelerate();
         }
@@ -95,7 +102,27 @@ public class Aircraft : MonoBehaviour {
             Decelerate();
         }
 
+        if (m_speed == m_initialSpeed)
+        {
+            if (m_inputAcceleration)
+            {
+                hasComplete = true;
+            }
+        }
+
+
+        if(hasComplete)
+        {
+            Boost();
+        }
+        else if(hasCompleteDe)
+        {
+            DeBoost();
+        }
+
+
         m_rb.velocity = transform.forward * m_speed;
+        
         
         Debug.Log(m_rb.velocity.magnitude);
         // create euler angles from the inputs
@@ -107,6 +134,32 @@ public class Aircraft : MonoBehaviour {
 
 
 
+    }
+    
+
+    void Boost()
+    {        
+
+        if (m_speed <= m_speedBoostMax)
+        {
+            m_speed += m_speedBoost / 4;
+        }
+        if (m_speed >= m_speedBoostMax)
+        {
+            hasComplete = false;
+            hasCompleteDe = true;
+        }
+    }
+
+    void DeBoost()
+    {
+        m_speed -= m_speedBoost / 2;
+
+        if (m_speed < m_initialSpeed)
+        {
+            m_speed = m_initialSpeed;
+            hasCompleteDe = false;
+        }
     }
 
     void Accelerate()

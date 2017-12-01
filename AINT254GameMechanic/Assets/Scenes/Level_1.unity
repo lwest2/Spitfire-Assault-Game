@@ -2197,6 +2197,7 @@ MonoBehaviour:
   height: 3.32
   heightDamping: 2.5
   rotationDamping: 5
+  aircraftScript: {fileID: 231283299}
 --- !u!1001 &1854021641
 Prefab:
   m_ObjectHideFlags: 0
