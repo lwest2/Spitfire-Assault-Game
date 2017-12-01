@@ -25,14 +25,19 @@ public class CameraFollow : MonoBehaviour
     private float m_maxFOV = 80.0f;
 
     // The target we are following
-    public Transform target;
+    [SerializeField]
+    private Transform m_target;
     // The distance in the x-z plane to the target
-    public float distance = 10.0f;
+    [SerializeField]
+    private float m_distance = 10.0f;
     // the height we want the camera to be above the target
-    public float height = 5.0f;
-    // How much we 
-    public float heightDamping = 2.0f;
-    public float rotationDamping = 3.0f;
+    [SerializeField]
+    private float m_height = 5.0f;
+    // How much we dampen height and rotation
+    [SerializeField]
+    private float m_heightDamping = 2.0f;
+    [SerializeField]
+    private float m_rotationDamping = 3.0f;
 
     // Place the script in the Camera-Control group in the component menu
     [AddComponentMenu("Camera-Control/Smooth Follow")]
@@ -44,40 +49,41 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         m_cameraFOV = GetComponent<Camera>();
+        // get intial FOV
         m_initialFOV = m_cameraFOV.fieldOfView;
     }
 
     void FixedUpdate()
     {
         // Early out if we don't have a target
-        if (!target) return;
+        if (!m_target) return;
 
         // Calculate the current rotation angles
-        float wantedRotationAngle = target.eulerAngles.y;
-        float wantedHeight = target.position.y + height;
+        float wantedRotationAngle = m_target.eulerAngles.y;
+        float wantedHeight = m_target.position.y + m_height;
 
         float currentRotationAngle = transform.eulerAngles.y;
         float currentHeight = transform.position.y;
 
         // Damp the rotation around the y-axis
-        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, m_rotationDamping * Time.deltaTime);
 
         // Damp the height
-        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, m_heightDamping * Time.deltaTime);
 
         // Convert the angle into a rotation
         var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
         // Set the position of the camera on the x-z plane to:
         // distance meters behind the target
-        transform.position = target.position;
-        transform.position -= currentRotation * Vector3.forward * distance;
+        transform.position = m_target.position;
+        transform.position -= currentRotation * Vector3.forward * m_distance;
 
         // Set the height of the camera
         transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
 
         // Always look at the target
-        transform.LookAt(target);
+        transform.LookAt(m_target);
 
         // shake camera
         ShakeCamera();
@@ -85,36 +91,47 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        // input pitch axis
         m_inputPitch = Input.GetAxis("pitch");
     }
 
     void ShakeCamera()
     {
+        // if pitch is decending or aircraft hascomplete bool (boosting)
         if (m_inputPitch < -0.9 || aircraftScript.getComplete())
         {
+            // if FOV is less than max FOV
             if (m_cameraFOV.fieldOfView < m_maxFOV)
             {
+                // shake screen within parameters of a sphere multiplied by shake amount
                 transform.position = transform.position + Random.insideUnitSphere * m_shakeAmount;
 
+                // decrease shake over time
                 m_shakeDuration += Time.deltaTime * m_decreaseFactor;
+
+                // change FOV
                 ChangeFOV();
             }
         }
         else
         {
+            // else use initial FOV
             InitialFOV();
         }
     }
 
     void ChangeFOV()
     {
+        // increase FOV over time
         m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView + m_fieldOfView * Time.deltaTime;
     }
 
     void InitialFOV()
     {
+        // if FOV is more than initial FOV
         if (m_cameraFOV.fieldOfView > m_initialFOV)
         {
+            // decrease FOV over time
             m_cameraFOV.fieldOfView = m_cameraFOV.fieldOfView - m_fieldOfView * Time.deltaTime;
         }
     }

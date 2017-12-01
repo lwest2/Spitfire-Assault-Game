@@ -21,41 +21,43 @@ public class Aircraft : MonoBehaviour {
     // acceleration and decelleration
     private float m_speed = 25.0f;          // starting speed
     private float m_maxSpeed = 28.0f;       // max velocity
-    private float m_rotationSpeed = 30.0f;
-    private float m_acceleration = 0.025f;
-    private float m_initialSpeed;
+    private float m_rotationSpeed = 30.0f;  // rotation speed
+    private float m_acceleration = 0.025f;  // added acceleration to velocity
+    private float m_initialSpeed;           // initial constant speed
 
     // boost
-    private float m_speedBoost = 1f;
-    private float m_speedBoostMax = 40f;
-    private bool hasComplete = false;
-    private bool hasCompleteDe = false;
+    private float m_speedBoost = 1f;        // boost speed
+    private float m_speedBoostMax = 40f;    // max velocity after boost
+    private bool m_hasComplete = false;       // testing if boost has completed
+    private bool m_hasCompleteDe = false;     // testing if deboost has completed
 
     //yaw, pitch, roll
     private Quaternion m_AddRot = Quaternion.identity;  // rotation to add
     private float m_roll = 0;   // roll value
     private float m_pitch = 0;  // pitch value  
     private float m_yaw = 0;    // yaw value
-    private float m_roll2 = 0;  // additional roll
 
     private Vector3 m_predictUp;    // prediction of the up vector
     private Vector3 m_torqueVector; // how much torque should be added   
 
+    // getter for hasComplete bool
     public bool getComplete()
     {
-        return hasComplete;
+        return m_hasComplete;
     }
 
+    // getter hasCompleteDe bool
     public bool getCompleteDe()
     {
-        return hasCompleteDe;
+        return m_hasCompleteDe;
     }
 
     // Use this for initialization
     void Start () {       
         m_rb = GetComponent<Rigidbody>();
         m_anim = GetComponent<Animator>();
-
+        
+        // set initial speed to the initial velocity for later use
         m_initialSpeed = m_speed;
         
 	}
@@ -63,16 +65,16 @@ public class Aircraft : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        Fly();
-        Animate();
+        Fly();      // fly
+        Animate();  // animate flaps, and rudders
     }
 
     private void Update()
     {       
         // inputs for xbox controls
-        m_inputYaw = Input.GetAxis("yaw");
-        m_inputPitch = Input.GetAxis("pitch");
-        m_inputAcceleration = Input.GetButtonDown("a button");
+        m_inputYaw = Input.GetAxis("yaw");                      // input for yaw
+        m_inputPitch = Input.GetAxis("pitch");                  // input for pitch
+        m_inputAcceleration = Input.GetButtonDown("a button");  // boost input
     }
 
     void Fly()
@@ -93,107 +95,120 @@ public class Aircraft : MonoBehaviour {
             m_rb.AddTorque(m_torqueVector * 1.0f * 1.0f);
         }
 
+        // if pitch is decending
         if (m_inputPitch < -0.9)
         {
+            // accelerate aircraft
             Accelerate();
         }
         else
         {
+            // decelerate aircraft
             Decelerate();
         }
 
-        if (m_speed == m_initialSpeed)
+        // if speed is equal to initial constant velocity && input for boost
+        if (m_speed == m_initialSpeed && m_inputAcceleration)
         {
-            if (m_inputAcceleration)
-            {
-                hasComplete = true;
-            }
+            // set hasComplete to true
+            m_hasComplete = true;
         }
 
-
-        if(hasComplete)
+        // if button is pressed
+        if(m_hasComplete)
         {
+            // boost
             Boost();
         }
-        else if(hasCompleteDe)
+        // once reaching max velocity speed this bool will activate deboost
+        else if(m_hasCompleteDe)
         {
+            // decelerate/deboost
             DeBoost();
         }
 
-
+        // set velocity to forward multiplied by the speed
         m_rb.velocity = transform.forward * m_speed;
         
-        
-        Debug.Log(m_rb.velocity.magnitude);
         // create euler angles from the inputs
-        m_AddRot.eulerAngles = new Vector3(-m_pitch, -m_yaw, m_roll + m_roll2);
+        m_AddRot.eulerAngles = new Vector3(-m_pitch, -m_yaw, m_roll);
 
         // add rotation to rigidbody
         m_rb.rotation *= m_AddRot;
-
-
-
-
     }
     
 
     void Boost()
     {        
-
+        // if speed is less or equal to max boost speed
         if (m_speed <= m_speedBoostMax)
         {
+            // increase speed dramatically
             m_speed += m_speedBoost / 4;
         }
-        if (m_speed >= m_speedBoostMax)
+        // else if speed is more or equal to max boost speed
+        else if (m_speed >= m_speedBoostMax)
         {
-            hasComplete = false;
-            hasCompleteDe = true;
+            // set has complete to false so cannot boost twice or more at the same time
+            m_hasComplete = false;
+            // set has complete de to true so it will be able to access the deboost method
+            m_hasCompleteDe = true;
         }
     }
 
     void DeBoost()
     {
+        // deduct speed at fast rate than increasing
         m_speed -= m_speedBoost / 2;
 
+        // if speed is less than the initial speed
         if (m_speed < m_initialSpeed)
         {
+            // set speed to initial speed
             m_speed = m_initialSpeed;
-            hasCompleteDe = false;
+            // has completeDe is now false, will not keep decelerating
+            m_hasCompleteDe = false;
         }
     }
 
     void Accelerate()
     {
+        // if speed is less or equal to max speed
         if (m_speed <= m_maxSpeed)
         {
+            // increase speed
             m_speed += m_acceleration;
         }
     }
 
     void Decelerate()
     {
-            m_speed -= m_acceleration;
+         // decrease speed
+         m_speed -= m_acceleration;
 
-            if (m_speed < m_initialSpeed)
-            {
-                m_speed = m_initialSpeed;
-            }
+        // if speed is less than initial speed
+        if (m_speed < m_initialSpeed)
+        {
+            // set speed to initial speed
+            m_speed = m_initialSpeed;
+        }
     }
 
 
     void Animate()
     {
+        // animate elevators
+        // if pitch is greater than 0
         if (m_inputPitch > 0)
         {
             m_anim.SetBool("Elevate", true);
-
         }
         else
         {
             m_anim.SetBool("Elevate", false);
         }
 
-
+        // if pitch is less than 0
         if (m_inputPitch < 0)
         {
             m_anim.SetBool("Deelevate", true);
@@ -202,8 +217,10 @@ public class Aircraft : MonoBehaviour {
         {
             m_anim.SetBool("Deelevate", false);
         }
+        // end animate elevators
 
-
+        // animate yaw (rudders, flaps)
+        // if yaw is more than 0
         if (m_inputYaw > 0)
         {
             m_anim.SetBool("Roll_left", true);
@@ -213,6 +230,7 @@ public class Aircraft : MonoBehaviour {
             m_anim.SetBool("Roll_left", false);
         }
 
+        // if yaw is less than 0
         if (m_inputYaw < 0)
         {
             m_anim.SetBool("Roll_right", true);
@@ -221,6 +239,7 @@ public class Aircraft : MonoBehaviour {
         {
             m_anim.SetBool("Roll_right", false);
         }
+        // end animate yaw (rudders, flaps)
     }
 
 
