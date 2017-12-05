@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace pool
+namespace Aircraft
 {
     public class PoolManager : MonoBehaviour
     {
