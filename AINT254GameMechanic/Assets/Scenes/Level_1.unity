@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 231283306}
   - component: {fileID: 231283307}
   - component: {fileID: 231283308}
+  - component: {fileID: 231283309}
   m_Layer: 0
   m_Name: Air
   m_TagString: Untagged
@@ -487,6 +488,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cafc3db43acc746953e7998c98d682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &231283309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231283297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5205e5507e265af4e9073e4c6d5c14d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawn_1: {fileID: 8840472}
+  bulletSpawn_2: {fileID: 1405191718}
 --- !u!1 &277305953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,6 +1257,53 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: af3cbe35fe7cd3348960ec2ca3e1d084, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &976020551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 976020553}
+  - component: {fileID: 976020552}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &976020552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976020551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627d57eacf3d4704ea494cac7ffa4767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - AircraftBullet
+  pooledObjects:
+  - {fileID: 1313604122117274, guid: ba285a586a28f75438a1030a85068451, type: 2}
+  poolAmounts: 0a000000
+  tempList: []
+--- !u!4 &976020553
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 976020551}
+  m_LocalRotation: {x: 0.000000141065, y: -0.0000001192093, z: -0.00000008742276,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 44.4, z: -146.58}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984420230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,6 +2188,7 @@ GameObject:
   - component: {fileID: 1849336132}
   - component: {fileID: 1849336131}
   - component: {fileID: 1849336136}
+  - component: {fileID: 1849336137}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2225,6 +2287,18 @@ MonoBehaviour:
   m_height: 3.51
   m_heightDamping: 2.5
   m_rotationDamping: 3
+--- !u!114 &1849336137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849336130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 37f1d47f52bf04f40be031137be927ee, type: 2}
 --- !u!1001 &1854021641
 Prefab:
   m_ObjectHideFlags: 0
