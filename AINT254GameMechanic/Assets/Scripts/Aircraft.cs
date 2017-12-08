@@ -141,6 +141,8 @@ namespace Aircraft
 
             // add rotation to rigidbody
             m_rb.rotation *= m_AddRot;
+
+            Debug.Log(m_rb.velocity.magnitude);
         }
 
 
