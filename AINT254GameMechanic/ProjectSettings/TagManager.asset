@@ -10,6 +10,8 @@ TagManager:
   - Projectile
   - Crate
   - Balloon
+  - AircraftBullet
+  - AircraftBullet_Length
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - AircraftBullet
+  - Player
   - 
   - 
   - 
