@@ -23,12 +23,17 @@ public class AircraftProjectile : MonoBehaviour {
 
     void FixedUpdate()
     {
+        if(gameObject.activeInHierarchy)
         m_rb.velocity = transform.forward * m_force;
     }
 
     void Die()
     {
-        gameObject.SetActive(false);
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+            m_rb.velocity = transform.forward * 0;
+        }
     }
 
     void OnDisable()

@@ -20,6 +20,12 @@ namespace Aircraft
         private bool isFiring = false;
         private float fireTime = 0.1f;
 
+        [SerializeField]
+        private ParticleSystem m_muzzleFlash;
+
+        [SerializeField]
+        private ParticleSystem m_muzzleFlash2;
+
         void setFiring()
         {
             isFiring = false;
@@ -66,9 +72,12 @@ namespace Aircraft
                 bullet.transform.position = bulletSpawn_1.transform.position;
                 bullet.transform.rotation = bulletSpawn_1.transform.rotation;
                 bullet.SetActive(true);
+                m_muzzleFlash.Play();
             }
 
             yield return new WaitForSecondsRealtime(0.1f);
+
+            m_muzzleFlash.Stop();
 
             GameObject bullet2 = poolManager.GetPooledObject("AircraftBullet");
 
@@ -78,8 +87,11 @@ namespace Aircraft
                 bullet2.transform.position = bulletSpawn_2.transform.position;
                 bullet2.transform.rotation = bulletSpawn_2.transform.rotation;
                 bullet2.SetActive(true);
+                m_muzzleFlash2.Play();
             }
+
             yield return new WaitForSecondsRealtime(0.1f);
+            m_muzzleFlash2.Stop();
         }
     }
 }
