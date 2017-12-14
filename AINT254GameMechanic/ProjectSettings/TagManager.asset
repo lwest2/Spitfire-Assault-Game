@@ -23,9 +23,9 @@ TagManager:
   - 
   - AircraftBullet
   - Player
-  - 
-  - 
-  - 
+  - CloudsToy
+  - EnemyProjectile
+  - Enemy
   - 
   - 
   - 

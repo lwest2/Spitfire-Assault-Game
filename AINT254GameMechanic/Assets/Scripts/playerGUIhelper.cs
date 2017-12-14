@@ -4,127 +4,131 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class playerGUIhelper : MonoBehaviour {
-    // references: https://unity3d.com/learn/tutorials/projects/survival-shooter/player-health?playlist=17144
-
-    private float m_playerHealth = 100;     // player health to 100
-    private float m_playerBombs = 3;        // player bombs to 3
-    private float m_playerObjectives = 4;   // player objects to 3
-    public static playerGUIhelper playergui;    // make this script available to other scripts
-    
-    [SerializeField]
-    private Slider m_healthSlider;  // health slider for player
-
-    [SerializeField]
-    private Image m_damageImage;    // image for when damaged
-
-    private float m_flashSpeed = 5.0f;  // fade effect
-    private Color m_flashColour = new Color(1f, 0f, 0f, 0.1f);  // red transparent image
-    private bool m_isDamaged;   // player damaged bool
-    private bool m_isDead;      // player dead bool
-
-    [SerializeField]
-    private Text m_bombText;    // bombs left text
-
-    [SerializeField]
-    private Text m_objectiveText;   // objectives left text
-
-    void OnEnable()
+namespace Aircraft
+{
+    public class playerGUIhelper : MonoBehaviour
     {
-        playergui = this;   // set instance to this
-    }
+        // references: https://unity3d.com/learn/tutorials/projects/survival-shooter/player-health?playlist=17144
 
-	
-	// Update is called once per frame
-	void Update () {
-        // if player is damaged
-		if(m_isDamaged)
+        private float m_playerHealth = 100;     // player health to 100
+        private float m_playerBombs = 3;        // player bombs to 3
+        private float m_playerObjectives = 1;   // player objects to 3
+        public static playerGUIhelper playergui;    // make this script available to other scripts
+
+        [SerializeField]
+        private Slider m_healthSlider;  // health slider for player
+
+        [SerializeField]
+        private Image m_damageImage;    // image for when damaged
+
+        private float m_flashSpeed = 0.1f;  // fade effect
+        private Color m_flashColour = new Color(1f, 0f, 0f, 0.1f);  // red transparent image
+        private bool m_isDamaged;   // player damaged bool
+        private bool m_isDead;      // player dead bool
+
+        [SerializeField]
+        private Text m_bombText;    // bombs left text
+
+        [SerializeField]
+        private Text m_objectiveText;   // objectives left text
+
+        private void Awake()
         {
-            // flash colour
-            m_damageImage.color = m_flashColour;
+            m_damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
         }
-        else
+
+        // Update is called once per frame
+        void Update()
         {
-            // else fade back to normal
-            m_damageImage.color = Color.Lerp(m_damageImage.color, Color.clear, m_flashSpeed * Time.deltaTime);
+            // if player is damaged
+            if (m_isDamaged)
+            {
+                // flash colour
+                m_damageImage.color = m_flashColour;
+            }
+            else
+            {
+                // else fade back to normal
+                m_damageImage.color = Color.Lerp(m_damageImage.color, Color.clear, m_flashSpeed * Time.deltaTime);
+            }
+            // set is damaged to false
+            m_isDamaged = false;
         }
-        // set is damaged to false
-        m_isDamaged = false;
-	}
 
-    public void setPlayerHealth(float value)
-    {
-        // if damaged is true
-        m_isDamaged = true;
-        // deduct player health
-        m_playerHealth += value;
-        // update health slider
-        m_healthSlider.value = m_playerHealth;
-
-        // if player health is less or equal to 0 and is not dead
-        if(m_playerHealth <= 0 && !m_isDead)
+        public void setPlayerHealth(float value)
         {
-            // call death
-            Death();
+            // if damaged is true
+            m_isDamaged = true;
+            // deduct player health
+            m_playerHealth -= value;
+            // update health slider
+            m_healthSlider.value = m_playerHealth;
+
+            // if player health is less or equal to 0 and is not dead
+            if (m_playerHealth <= 0 && !m_isDead)
+            {
+                // call death
+                Death();
+            }
+            Debug.Log(m_playerHealth);
         }
-        Debug.Log(m_playerHealth);
-    }
 
-    public float getPlayerHealth()
-    {
-        return m_playerHealth;
-    }
-
-    void Death()
-    {
-        // is dead is equal to true
-        m_isDead = true;
-        // load game over scene
-        SceneManager.LoadScene(3);
-    }
-
-    public void setPlayerBombs(float value)
-    {
-        // if player bombs is more than 0
-        if (m_playerBombs > 0)
+        public float getPlayerHealth()
         {
-            // deduct player bombs
-            m_playerBombs += value;
-            // update bombs left text
-            m_bombText.text = "Bombs: " + m_playerBombs.ToString();
+            return m_playerHealth;
         }
-    }
 
-    public void addPlayerBombs(float value)
-    {
-        if(m_playerBombs >= 0)
+        void Death()
         {
-            m_playerBombs += value;
-
-            m_bombText.text = "Bombs: " + m_playerBombs.ToString();
+            // is dead is equal to true
+            m_isDead = true;
+            // load game over scene
+            SceneManager.LoadScene(3);
         }
-    }
 
-    public float getPlayerBombs()
-    {
-        return m_playerBombs;
-    }
-
-    public void setPlayerObjectives(float value)
-    {
-        // if player objectives is more than 1
-        if (m_playerObjectives > 1)
+        public void setPlayerBombs(float value)
         {
-            // deduct player objectives
-            m_playerObjectives += value;
-            // update objects left text
-            m_objectiveText.text = "Objectives Left: " + m_playerObjectives.ToString();
+            // if player bombs is more than 0
+            if (m_playerBombs > 0)
+            {
+                // deduct player bombs
+                m_playerBombs += value;
+                // update bombs left text
+                m_bombText.text = "Bombs: " + m_playerBombs.ToString();
+            }
         }
-        else
-        {
-            // else load scene win
-            SceneManager.LoadScene(4);
-        }
-    }
 
+        public void addPlayerBombs(float value)
+        {
+            if (m_playerBombs >= 0)
+            {
+                m_playerBombs += value;
+
+                m_bombText.text = "Bombs: " + m_playerBombs.ToString();
+            }
+        }
+
+        public float getPlayerBombs()
+        {
+            return m_playerBombs;
+        }
+
+        public void setPlayerObjectives(float value)
+        {
+            // if player objectives is more than 1
+            if (m_playerObjectives > 1)
+            {
+                // deduct player objectives
+                m_playerObjectives += value;
+                // update objects left text
+                m_objectiveText.text = "Objectives Left: " + m_playerObjectives.ToString();
+            }
+            else
+            {
+                // else load scene win
+                SceneManager.LoadScene(4);
+            }
+        }
+
+    }
 }

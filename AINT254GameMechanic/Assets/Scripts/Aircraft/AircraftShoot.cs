@@ -50,6 +50,11 @@ namespace Aircraft
                 }
 
             }
+            else
+            {
+                m_muzzleFlash.Stop();
+                m_muzzleFlash2.Stop();
+            }
 
         }
 
@@ -58,7 +63,6 @@ namespace Aircraft
             isFiring = true;
 
             StartCoroutine(Firing());
-            GameObject bullet = poolManager.GetPooledObject("AircraftBullet");
            
             Invoke("setFiring", fireTime);
         }
@@ -68,30 +72,28 @@ namespace Aircraft
             GameObject bullet = poolManager.GetPooledObject("AircraftBullet");
 
             if (bullet != null)
-            {
+            {               
                 bullet.transform.position = bulletSpawn_1.transform.position;
                 bullet.transform.rotation = bulletSpawn_1.transform.rotation;
-                bullet.SetActive(true);
                 m_muzzleFlash.Play();
+                bullet.SetActive(true);
             }
 
             yield return new WaitForSecondsRealtime(0.1f);
-
-            m_muzzleFlash.Stop();
 
             GameObject bullet2 = poolManager.GetPooledObject("AircraftBullet");
 
 
             if (bullet2 != null)
-            {
+            {             
                 bullet2.transform.position = bulletSpawn_2.transform.position;
                 bullet2.transform.rotation = bulletSpawn_2.transform.rotation;
-                bullet2.SetActive(true);
+
                 m_muzzleFlash2.Play();
+                bullet2.SetActive(true);
             }
 
             yield return new WaitForSecondsRealtime(0.1f);
-            m_muzzleFlash2.Stop();
         }
     }
 }

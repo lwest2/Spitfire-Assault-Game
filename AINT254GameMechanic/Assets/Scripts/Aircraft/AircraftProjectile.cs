@@ -12,7 +12,7 @@ public class AircraftProjectile : MonoBehaviour {
     void OnEnable()
     {
         // invoke death
-        Invoke("Die", 1.0f);
+        Invoke("Die", 1f);
     }
 
     // Use this for initialization

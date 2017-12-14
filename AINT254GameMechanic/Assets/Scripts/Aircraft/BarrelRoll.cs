@@ -71,9 +71,6 @@ namespace Aircraft
             // if barrel roll is active and local z is less than predicted up z or is larger than the predicted up z + 360
             if (m_barrelRollActive && (transform.localEulerAngles.z < m_predictUp.z - m_minAllowance || transform.localEulerAngles.z > (m_predictUp.z + 360) - m_minAllowance))
             {
-                // makes sure that it does not keep spinning
-                // set rotation to 0
-                m_rotation = 0;
                 // set barrel roll active to false
                 m_barrelRollActive = false;
                 // set right bool to false
