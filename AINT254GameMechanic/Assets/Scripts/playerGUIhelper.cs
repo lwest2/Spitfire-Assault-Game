@@ -12,7 +12,7 @@ namespace Aircraft
 
         private float m_playerHealth = 100;     // player health to 100
         private float m_playerBombs = 3;        // player bombs to 3
-        private float m_playerObjectives = 1;   // player objects to 3
+        private float m_playerObjectives = 2;   // player objects to 3
         public static playerGUIhelper playergui;    // make this script available to other scripts
 
         [SerializeField]
@@ -35,6 +35,7 @@ namespace Aircraft
         private void Awake()
         {
             m_damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
+            m_objectiveText = GameObject.Find("ObjectivesText").GetComponent<Text>();
         }
 
         // Update is called once per frame
@@ -85,34 +86,7 @@ namespace Aircraft
             // load game over scene
             SceneManager.LoadScene(3);
         }
-
-        public void setPlayerBombs(float value)
-        {
-            // if player bombs is more than 0
-            if (m_playerBombs > 0)
-            {
-                // deduct player bombs
-                m_playerBombs += value;
-                // update bombs left text
-                m_bombText.text = "Bombs: " + m_playerBombs.ToString();
-            }
-        }
-
-        public void addPlayerBombs(float value)
-        {
-            if (m_playerBombs >= 0)
-            {
-                m_playerBombs += value;
-
-                m_bombText.text = "Bombs: " + m_playerBombs.ToString();
-            }
-        }
-
-        public float getPlayerBombs()
-        {
-            return m_playerBombs;
-        }
-
+        
         public void setPlayerObjectives(float value)
         {
             // if player objectives is more than 1
