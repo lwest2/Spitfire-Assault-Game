@@ -6,7 +6,7 @@ public class EnemyGun : MonoBehaviour {
     
     // get transform for gun
     private Transform m_transform;
-    
+
     // get target for gun to aim at
     [SerializeField]
     private GameObject m_target;
@@ -18,7 +18,9 @@ public class EnemyGun : MonoBehaviour {
     // get turret projectile spawn point
     [SerializeField]
     private Transform m_bulletSpawn;
-    
+
+    private float m_speed = 0.2f;
+
     // Use this for initialization
     void Start () {
         m_transform = transform;
@@ -33,16 +35,6 @@ public class EnemyGun : MonoBehaviour {
         {
             // cancel invoke
             CancelInvoke("Fire");
-        }
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        // if target is available
-        if (m_target)
-        {
-            // rotate turret to look at target
-            m_transform.LookAt(m_target.transform.position);
         }
     }
 
