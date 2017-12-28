@@ -26,6 +26,11 @@ namespace Aircraft
             {
                 m_playerGUIhelperScript.setPlayerHealth(5f);
             }
+
+            if (other.CompareTag("Enemy"))
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

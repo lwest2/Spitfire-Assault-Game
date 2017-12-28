@@ -15,7 +15,7 @@ public class EnemyGunRotation : MonoBehaviour {
     [SerializeField]
     private Transform m_target;
 
-    private float m_rotSpeed = 0.5f;
+    private float m_rotSpeed = 0.8f;
 
     private Quaternion m_lookRot;
     private Vector3 m_dir;
@@ -53,14 +53,12 @@ public class EnemyGunRotation : MonoBehaviour {
         
         m_lookRotGun = Quaternion.LookRotation(m_gunDir.normalized);
 
-        m_turretBarrels.transform.rotation = Quaternion.Slerp(m_turretBarrels.transform.rotation, m_lookRotGun, Time.deltaTime * m_rotSpeed);
-        
-
+        m_turretBarrels.transform.rotation = Quaternion.Lerp(m_turretBarrels.transform.rotation, m_lookRotGun, Time.deltaTime * m_rotSpeed);
     }
 
     private void LateUpdate()
     {
-        m_turretBarrels.eulerAngles = new Vector3(ClampAngle(m_turretBarrels.eulerAngles.x, -20, 10), m_turretBase.eulerAngles.y, 0);
+        m_turretBarrels.eulerAngles = new Vector3(ClampAngle(m_turretBarrels.eulerAngles.x, -10, 10), m_turretBase.eulerAngles.y, 0);
     }
 
     float ClampAngle(float angle, float min, float max)

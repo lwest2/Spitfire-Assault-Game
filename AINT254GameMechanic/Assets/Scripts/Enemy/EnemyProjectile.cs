@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour {
 
     // player bullet speed
-    private float m_force = 70.0f;
+    private float m_force = 120.0f;
     private Rigidbody m_rb;
 
     void OnEnable()
