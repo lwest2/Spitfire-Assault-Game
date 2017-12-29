@@ -12,10 +12,9 @@ public class EnemyGunRotation : MonoBehaviour {
     [SerializeField]
     private Transform m_turretBase;
 
-    [SerializeField]
     private Transform m_target;
 
-    private float m_rotSpeed = 0.8f;
+    private float m_rotSpeed;
 
     private Quaternion m_lookRot;
     private Vector3 m_dir;
@@ -25,6 +24,8 @@ public class EnemyGunRotation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        m_target = GameObject.Find("Air").GetComponent<Transform>();
+        m_rotSpeed = Random.Range(0.8f, 0.10f);
 	}
 	
 	// Update is called once per frame

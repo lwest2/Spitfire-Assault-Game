@@ -11,7 +11,6 @@ namespace Aircraft
         private Transform m_transform;
 
         // get target for gun to aim at
-        [SerializeField]
         private GameObject m_target;
 
         // get enemy projectile
@@ -22,7 +21,7 @@ namespace Aircraft
         [SerializeField]
         private Transform[] m_bulletSpawn = new Transform[3];
 
-        private float m_speed = 0.2f;
+        private float m_speed;
 
         // pool manager
         private PoolManager poolManager;
@@ -31,16 +30,29 @@ namespace Aircraft
 
         private Animator m_anim;
 
+        private int m_randomValue;
+        private int[] m_randomValueArray = new int[] { 3, 6, 9 };
+        private int index;
+
         // Use this for initialization
         void Start()
         {
-            m_anim = GetComponentInParent<Animator>();
+            
+            m_anim = GetComponent<Animator>();
             poolManager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+            m_target = GameObject.Find("Air");
+
             m_transform = transform;
+
+            index = Random.Range(0, m_randomValueArray.Length);
+            m_randomValue = m_randomValueArray[index];
+
+            Debug.Log(m_randomValue);
 
             // if target is available
             if (m_target)
             {
+                Debug.Log("Test");
                 // invoke the repeating fire
                 InvokeRepeating("Fire", 1.0f, 3.0f);
             }
@@ -57,11 +69,11 @@ namespace Aircraft
             {
                 StartCoroutine(Firing());
             }
-            
+
             // instantiate enemy projectile
 
 
-            Invoke("setFiring", Random.Range(2, 5));
+            Invoke("setFiring", m_randomValue);
         }
 
         void setFiring()

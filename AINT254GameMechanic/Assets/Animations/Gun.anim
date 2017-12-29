@@ -24,8 +24,8 @@ AnimationClip:
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.083333336
-        value: {x: 3.9624023, y: 0.59, z: -0.75}
+        time: 0.13333334
+        value: {x: 3.962402, y: 0.5900011, z: -0.1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -50,7 +50,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Turret_01/Gun/Turret_Gun002
+    path: Gun/Turret_Gun002
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -67,8 +67,8 @@ AnimationClip:
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.5833333
-        value: {x: 0, y: 0.59, z: -0.75}
+        time: 0.6333333
+        value: {x: 0, y: 0.59, z: -0.1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -87,7 +87,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Turret_01/Gun/Turret_Gun003
+    path: Gun/Turret_Gun003
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -110,8 +110,8 @@ AnimationClip:
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 1.0833334
-        value: {x: -3.9624023, y: 0.59, z: -0.75}
+        time: 1.1333333
+        value: {x: -3.9624023, y: 0.5900011, z: -0.1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -124,7 +124,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Turret_01/Gun/Turret_Gun004
+    path: Gun/Turret_Gun004
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -136,21 +136,21 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2428587180
+      path: 613324614
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3888544826
+      path: 1401530320
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2040719769
+      path: 3454874227
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -188,12 +188,6 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.083333336
-        value: 3.9624023
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
         time: 0.5
         value: 3.962402
         inSlope: 0
@@ -215,7 +209,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Turret_01/Gun/Turret_Gun002
+    path: Gun/Turret_Gun002
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -224,12 +218,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 0
         value: 0.5900011
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 0.083333336
-        value: 0.59
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -255,7 +243,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Turret_01/Gun/Turret_Gun002
+    path: Gun/Turret_Gun002
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -268,8 +256,8 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.083333336
-        value: -0.75
+        time: 0.13333334
+        value: -0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -295,7 +283,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Turret_01/Gun/Turret_Gun002
+    path: Gun/Turret_Gun002
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -329,7 +317,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Turret_01/Gun/Turret_Gun003
+    path: Gun/Turret_Gun003
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -363,7 +351,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Turret_01/Gun/Turret_Gun003
+    path: Gun/Turret_Gun003
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -382,8 +370,8 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.5833333
-        value: -0.75
+        time: 0.6333333
+        value: -0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -403,7 +391,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Turret_01/Gun/Turret_Gun003
+    path: Gun/Turret_Gun003
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -423,12 +411,6 @@ AnimationClip:
         tangentMode: 136
       - serializedVersion: 2
         time: 1
-        value: -3.9624023
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 1.0833334
         value: -3.9624023
         inSlope: 0
         outSlope: 0
@@ -443,7 +425,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Turret_01/Gun/Turret_Gun004
+    path: Gun/Turret_Gun004
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -464,12 +446,6 @@ AnimationClip:
       - serializedVersion: 2
         time: 1
         value: 0.5900011
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 1.0833334
-        value: 0.59
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -483,7 +459,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Turret_01/Gun/Turret_Gun004
+    path: Gun/Turret_Gun004
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -508,8 +484,8 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 1.0833334
-        value: -0.75
+        time: 1.1333333
+        value: -0.1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -523,7 +499,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Turret_01/Gun/Turret_Gun004
+    path: Gun/Turret_Gun004
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

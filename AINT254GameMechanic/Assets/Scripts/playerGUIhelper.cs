@@ -71,7 +71,6 @@ namespace Aircraft
                 // call death
                 Death();
             }
-            Debug.Log(m_playerHealth);
         }
 
         public float getPlayerHealth()

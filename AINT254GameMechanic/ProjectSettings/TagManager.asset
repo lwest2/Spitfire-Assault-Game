@@ -12,6 +12,8 @@ TagManager:
   - Balloon
   - AircraftBullet
   - AircraftBullet_Length
+  - EnemyTurretSpawn
+  - EnemyProjectileSpawn
   layers:
   - Default
   - TransparentFX
