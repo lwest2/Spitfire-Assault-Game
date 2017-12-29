@@ -10,6 +10,8 @@ namespace Aircraft
         [SerializeField]
         private GameObject turretPrefab;
 
+        private List<GameObject> turretList = new List<GameObject>();
+
         // Use this for initialization
         void Start()
         {
@@ -19,6 +21,7 @@ namespace Aircraft
                 if (child.CompareTag("EnemyTurretSpawn"))
                 {
                     GameObject temp = Instantiate(turretPrefab, child);
+                    turretList.Add(temp);
                 }
             }
         }

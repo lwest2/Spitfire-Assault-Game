@@ -10,10 +10,6 @@ namespace Aircraft
     {
         private TurretTakeDamage m_turretTakeDamageScript;
 
-        private void Awake()
-        {
-            m_turretTakeDamageScript = GameObject.Find("Ship").GetComponent<TurretTakeDamage>();
-        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -23,10 +19,12 @@ namespace Aircraft
                 gameObject.SetActive(false);
             }
 
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag("Turret"))
             {
+                Debug.Log("Testing");
                 // play effects
-                m_turretTakeDamageScript.setEnemyHealth(0.5f);
+                m_turretTakeDamageScript = other.GetComponentInParent<TurretTakeDamage>();
+                m_turretTakeDamageScript.setEnemyHealth(1.0f);
             }
 
             if (other.CompareTag("Projectile"))
