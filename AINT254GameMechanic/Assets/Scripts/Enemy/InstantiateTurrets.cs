@@ -15,15 +15,8 @@ namespace Aircraft
         // Use this for initialization
         void Start()
         {
-            Transform[] m_turretSpawn = GetComponentsInChildren<Transform>();
-            foreach (Transform child in m_turretSpawn)
-            {
-                if (child.CompareTag("EnemyTurretSpawn"))
-                {
-                    GameObject temp = Instantiate(turretPrefab, child);
-                    turretList.Add(temp);
-                }
-            }
+
         }
+        
     }
 }

@@ -23,7 +23,7 @@ namespace Aircraft
             {
                 Debug.Log("Testing");
                 // play effects
-                m_turretTakeDamageScript = other.GetComponentInParent<TurretTakeDamage>();
+                m_turretTakeDamageScript = other.GetComponent<TurretTakeDamage>();
                 m_turretTakeDamageScript.setEnemyHealth(1.0f);
             }
 

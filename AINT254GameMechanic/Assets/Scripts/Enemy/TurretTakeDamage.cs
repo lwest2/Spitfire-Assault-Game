@@ -38,7 +38,8 @@ namespace Aircraft
             // is dead equal to true
             m_isDead = true;
             // destroy turret
-            Debug.Log("Disable turret");
+            Debug.Log("Dead");
+            gameObject.SetActive(false);
         }
 
         float Map(float value, float inMin, float inMax, float outMin, float outMax)

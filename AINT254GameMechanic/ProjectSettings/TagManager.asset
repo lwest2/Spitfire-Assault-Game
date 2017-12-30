@@ -15,6 +15,7 @@ TagManager:
   - EnemyTurretSpawn
   - EnemyProjectileSpawn
   - Turret
+  - EnemyShipSpawn
   layers:
   - Default
   - TransparentFX

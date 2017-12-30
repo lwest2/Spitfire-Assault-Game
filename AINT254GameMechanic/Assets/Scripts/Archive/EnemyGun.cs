@@ -65,11 +65,13 @@ namespace Aircraft
 
         void Fire()
         {
-            if (!isFiring)
+            if (this)
             {
-                StartCoroutine(Firing());
+                if (!isFiring)
+                {
+                    StartCoroutine(Firing());
+                }
             }
-
             // instantiate enemy projectile
 
 
