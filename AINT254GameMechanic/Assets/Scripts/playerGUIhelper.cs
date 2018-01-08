@@ -16,7 +16,7 @@ namespace Aircraft
         public static playerGUIhelper playergui;    // make this script available to other scripts
 
         [SerializeField]
-        private Slider m_healthSlider;  // health slider for player
+        private Image m_healthSlider;  // health slider for player
 
         [SerializeField]
         private Image m_damageImage;    // image for when damaged
@@ -63,7 +63,8 @@ namespace Aircraft
             // deduct player health
             m_playerHealth -= value;
             // update health slider
-            m_healthSlider.value = m_playerHealth;
+            // update slider
+            m_healthSlider.fillAmount = Map(m_playerHealth, 0, 100, 0, 1);
 
             // if player health is less or equal to 0 and is not dead
             if (m_playerHealth <= 0 && !m_isDead)
@@ -101,6 +102,13 @@ namespace Aircraft
                 // else load scene win
                 SceneManager.LoadScene(4);
             }
+        }
+
+        float Map(float value, float inMin, float inMax, float outMin, float outMax)
+        {
+            return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+            // (current health - deadHealth) * (1 - 0 ratio) / (maximum health - deadHealth) + 0
+
         }
 
     }
