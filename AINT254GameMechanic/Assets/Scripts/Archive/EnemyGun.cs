@@ -52,7 +52,6 @@ namespace Aircraft
             // if target is available
             if (m_target)
             {
-                Debug.Log("Test");
                 // invoke the repeating fire
                 InvokeRepeating("Fire", 1.0f, 3.0f);
             }
@@ -101,6 +100,11 @@ namespace Aircraft
 
                 yield return new WaitForSecondsRealtime(0.5f);
             }
+        }
+
+        private void OnDisable()
+        {
+            CancelInvoke();
         }
     }
 }

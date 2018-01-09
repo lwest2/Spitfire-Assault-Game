@@ -21,10 +21,9 @@ namespace Aircraft
 
             if (other.CompareTag("Turret"))
             {
-                Debug.Log("Testing");
                 // play effects
                 m_turretTakeDamageScript = other.GetComponent<TurretTakeDamage>();
-                m_turretTakeDamageScript.setEnemyHealth(1.0f);
+                m_turretTakeDamageScript.setEnemyHealth(50.0f);
             }
 
             if (other.CompareTag("Projectile"))

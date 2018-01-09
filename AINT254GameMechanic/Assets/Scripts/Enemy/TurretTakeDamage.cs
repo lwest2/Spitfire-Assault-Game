@@ -16,7 +16,20 @@ namespace Aircraft
         private Image m_healthSlider;  // health slider
 
         private bool m_isDead;  // is dead bool
-        
+
+        private SpawnEnemies m_spawnEnemies_script;
+        private List<GameObject> shipList = new List<GameObject>();
+        private CheckShipChildren m_checkShipChidren_script;
+        private playerGUIhelper m_playerGUIhelperScript;
+
+     
+        private void Awake()
+        {
+            m_playerGUIhelperScript = GameObject.Find("playerGUIHelper").GetComponent<playerGUIhelper>();
+            m_spawnEnemies_script = GameObject.Find("BuildManager").GetComponent<SpawnEnemies>();
+            shipList = m_spawnEnemies_script.getShipList();
+        }
+
         public void setEnemyHealth(float value)
         {
             // deduct enemy health
@@ -38,8 +51,10 @@ namespace Aircraft
             // is dead equal to true
             m_isDead = true;
             // destroy turret
-            Debug.Log("Dead");
             gameObject.SetActive(false);
+
+            CheckShip();
+
         }
 
         float Map(float value, float inMin, float inMax, float outMin, float outMax)
@@ -47,6 +62,22 @@ namespace Aircraft
             return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
             // (current health - deadHealth) * (1 - 0 ratio) / (maximum health - deadHealth) + 0
 
+        }
+
+        void CheckShip()
+        {
+            foreach (GameObject ship in shipList)
+            {
+                m_checkShipChidren_script = ship.GetComponent<CheckShipChildren>();
+
+                int numberOfTurrets = m_checkShipChidren_script.CheckShip(ship);
+
+                if (numberOfTurrets == 0)
+                {
+                    ship.SetActive(false);
+
+                }
+            }
         }
     }
 }

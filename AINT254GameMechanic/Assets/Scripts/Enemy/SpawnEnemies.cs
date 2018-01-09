@@ -53,13 +53,16 @@ namespace Aircraft
 
         void BuildTurrets()
         {
+            // for each ship
             foreach (GameObject ship in shipList)
             {
+                // get turret spawn in ship
                 Transform[] m_turretSpawn = ship.GetComponentsInChildren<Transform>();
                 foreach (Transform child in m_turretSpawn)
                 {
                     if (child.CompareTag("EnemyTurretSpawn"))
                     {
+                        // instantiate at position of turret spawn
                         GameObject temp = Instantiate(turretPrefab, child) as GameObject;
                         turretList.Add(temp);
                     }
@@ -70,6 +73,23 @@ namespace Aircraft
         public List<GameObject> getTurretList()
         {
             return turretList;
+        }
+
+        public List<GameObject> getShipList()
+        {
+            return shipList;
+        }
+
+        public int getNumberOfShips()
+        {
+            return NumberOfShips();
+        }
+
+        private int NumberOfShips()
+        {
+            int numberOfShips;
+            numberOfShips = shipList.Count;
+            return numberOfShips;
         }
     }
 }

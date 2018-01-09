@@ -32,10 +32,18 @@ namespace Aircraft
         [SerializeField]
         private Text m_objectiveText;   // objectives left text
 
+        private SpawnEnemies m_spawnEnemies_script;
+
         private void Awake()
         {
             m_damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
             m_objectiveText = GameObject.Find("ObjectivesText").GetComponent<Text>();
+            m_spawnEnemies_script = GameObject.Find("BuildManager").GetComponent<SpawnEnemies>();
+        }
+
+        private void Start()
+        {
+            m_playerObjectives = m_spawnEnemies_script.getNumberOfShips();
         }
 
         // Update is called once per frame
@@ -54,6 +62,7 @@ namespace Aircraft
             }
             // set is damaged to false
             m_isDamaged = false;
+            
         }
 
         public void setPlayerHealth(float value)
@@ -87,15 +96,19 @@ namespace Aircraft
             SceneManager.LoadScene(3);
         }
         
-        public void setPlayerObjectives(float value)
+        public void setPlayerObjectives(float shipInterval)
         {
-            // if player objectives is more than 1
-            if (m_playerObjectives > 1)
+            // if player objectives is more than 0
+            if (m_playerObjectives > 0)
             {
+                Debug.Log(m_playerObjectives);
                 // deduct player objectives
-                m_playerObjectives += value;
+                m_playerObjectives -= shipInterval;
                 // update objects left text
-                m_objectiveText.text = "Objectives Left: " + m_playerObjectives.ToString();
+                if (m_objectiveText)
+                {
+                    m_objectiveText.text = "Objectives Left: " + m_playerObjectives.ToString();
+                }
             }
             else
             {

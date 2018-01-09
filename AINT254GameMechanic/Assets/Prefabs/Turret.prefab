@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 23431699247840478}
   m_Layer: 0
   m_Name: Turret_Head
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4706977854732354}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1

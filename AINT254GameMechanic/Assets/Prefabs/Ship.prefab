@@ -114,6 +114,8 @@ GameObject:
   - component: {fileID: 95515251528330798}
   - component: {fileID: 54828144540043190}
   - component: {fileID: 114227126105395424}
+  - component: {fileID: 114448878114262988}
+  - component: {fileID: 114555917514644180}
   m_Layer: 12
   m_Name: Ship
   m_TagString: Enemy
@@ -637,5 +639,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b8fbad4278ecc74b9233beea671e5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114448878114262988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810696385679652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd27d8a49122c9418c567cafd591a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114555917514644180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810696385679652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed8bac00fe434b4ba4ae712af45c89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
