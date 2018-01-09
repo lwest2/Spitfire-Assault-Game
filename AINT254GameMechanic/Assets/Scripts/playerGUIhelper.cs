@@ -11,7 +11,6 @@ namespace Aircraft
         // references: https://unity3d.com/learn/tutorials/projects/survival-shooter/player-health?playlist=17144
 
         private float m_playerHealth = 100;     // player health to 100
-        private float m_playerBombs = 3;        // player bombs to 3
         private float m_playerObjectives = 2;   // player objects to 3
         public static playerGUIhelper playergui;    // make this script available to other scripts
 
@@ -109,11 +108,11 @@ namespace Aircraft
                 {
                     m_objectiveText.text = "Objectives Left: " + m_playerObjectives.ToString();
                 }
-            }
-            else
-            {
-                // else load scene win
-                SceneManager.LoadScene(4);
+                if (m_playerObjectives == 0)
+                {
+                    // else load scene win
+                    SceneManager.LoadScene(4);
+                }
             }
         }
 

@@ -20,12 +20,10 @@ namespace Aircraft
         private SpawnEnemies m_spawnEnemies_script;
         private List<GameObject> shipList = new List<GameObject>();
         private CheckShipChildren m_checkShipChidren_script;
-        private playerGUIhelper m_playerGUIhelperScript;
 
      
         private void Awake()
         {
-            m_playerGUIhelperScript = GameObject.Find("playerGUIHelper").GetComponent<playerGUIhelper>();
             m_spawnEnemies_script = GameObject.Find("BuildManager").GetComponent<SpawnEnemies>();
             shipList = m_spawnEnemies_script.getShipList();
         }

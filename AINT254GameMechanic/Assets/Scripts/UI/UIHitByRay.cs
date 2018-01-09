@@ -10,8 +10,7 @@ namespace Aircraft
         [SerializeField]
         private Canvas m_healthBar;
         private CanvasGroup m_healthBar_CG;
-
-        float progress = 0.0f;
+        
         bool fadeOutBool = true;
 
         void Start()

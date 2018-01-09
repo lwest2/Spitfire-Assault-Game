@@ -23,7 +23,7 @@ namespace Aircraft
             {
                 // play effects
                 m_turretTakeDamageScript = other.GetComponent<TurretTakeDamage>();
-                m_turretTakeDamageScript.setEnemyHealth(50.0f);
+                m_turretTakeDamageScript.setEnemyHealth(2.0f);
             }
 
             if (other.CompareTag("Projectile"))
