@@ -16,6 +16,9 @@ TagManager:
   - EnemyProjectileSpawn
   - Turret
   - EnemyShipSpawn
+  - ShipBoundary
+  - innerShipBoundary
+  - aircraftBoundary
   layers:
   - Default
   - TransparentFX
