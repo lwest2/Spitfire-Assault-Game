@@ -15,10 +15,14 @@ namespace Aircraft
         private float m_speedBoostMax;
         private float m_speedBoost;
 
+        [SerializeField]
+        private AudioSource m_audioSource;
+
         void Awake()
         {
             aircraftScript = GameObject.Find("Air").GetComponent<Aircraft>();
             aircraftInput = GameObject.Find("Air").GetComponent<AircraftInput>();
+            m_audioSource = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -40,6 +44,7 @@ namespace Aircraft
             {
                 // boost
                 Boosting();
+                
             }
             // once reaching max velocity speed this bool will activate deboost
             else if (aircraftScript.getCompleteDeboost() == true)
@@ -52,6 +57,7 @@ namespace Aircraft
         void Boosting()
         {
             m_speedBoostMax = aircraftScript.getSpeedBoostMax();
+            m_audioSource.pitch += 0.015f;
             // if speed is less or equal to max boost speed
             if (m_speed <= m_speedBoostMax)
             {
@@ -74,10 +80,11 @@ namespace Aircraft
         {
             // deduct speed at fast rate than increasing
             m_speed -= m_speedBoost / 2;
-
+            m_audioSource.pitch -= 0.015f;
             // if speed is less than the initial speed
             if (m_speed < m_initialSpeed)
             {
+                m_audioSource.pitch = 1f;
                 // set speed to initial speed
                 m_speed = m_initialSpeed;
                 // has completeDe is now false, will not keep decelerating

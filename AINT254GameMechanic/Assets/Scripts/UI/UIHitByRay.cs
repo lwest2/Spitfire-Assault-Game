@@ -23,6 +23,7 @@ namespace Aircraft
         {
             Debug.Log("Fade in");
 
+            // fade health bar in
             m_healthBar_CG.alpha = 1f;
             fadeOutBool = true;
         }
@@ -32,6 +33,8 @@ namespace Aircraft
             Debug.Log("Fade out");
             if (fadeOutBool)
             {
+
+                // fade health bar out
                 m_healthBar_CG.alpha = 0.4f;
                 fadeOutBool = false;
             }

@@ -41,9 +41,19 @@ namespace Aircraft
         private Vector3 m_predictUp;    // prediction of the up vector
         private Vector3 m_torqueVector; // how much torque should be added   
 
+        private AudioSource m_audioSource;
+        [SerializeField]
+        private AudioClip m_audioClip;
+
         public void Awake()
         {
+            m_audioSource = GetComponent<AudioSource>();
             aircraftInput = GetComponent<AircraftInput>();
+            if (!m_audioSource.isPlaying)
+            {
+                m_audioSource.clip = m_audioClip;
+                m_audioSource.Play();
+            }
         }
 
         public void SetSpeed(float m_speed)

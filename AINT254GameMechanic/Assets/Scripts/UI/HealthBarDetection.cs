@@ -27,15 +27,18 @@ namespace Aircraft {
                 
                 foreach (GameObject o in m_spawnEnemiesScript.getTurretList())
                 {
-                    IFadeable enemy = o.GetComponent<UIHitByRay>();
-                    // if turret in list index is the turret that is hit
-                    if (o == hit.collider.gameObject)
+                    if (o != null)
                     {
-                        enemy.fadeIn();
-                    }
-                    else
-                    {
-                        enemy.fadeOut();
+                        IFadeable enemy = o.GetComponent<UIHitByRay>();
+                        // if turret in list index is the turret that is hit
+                        if (o == hit.collider.gameObject)
+                        {
+                            enemy.fadeIn();
+                        }
+                        else
+                        {
+                            enemy.fadeOut();
+                        }
                     }
                 }
                 

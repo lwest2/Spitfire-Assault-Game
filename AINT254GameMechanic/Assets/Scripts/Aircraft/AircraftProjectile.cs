@@ -24,15 +24,19 @@ public class AircraftProjectile : MonoBehaviour {
 
     void FixedUpdate()
     {
+        // if active have forward momentum
         if(gameObject.activeInHierarchy)
         m_rb.velocity = transform.forward * m_force;
     }
 
     void Die()
     {
+        // once dead
         if (gameObject.activeInHierarchy)
         {
+            // disable
             gameObject.SetActive(false);
+            // reset forward momentum
             m_rb.velocity = transform.forward * 0;
         }
     }

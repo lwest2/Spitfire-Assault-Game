@@ -88,6 +88,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
   m_IsActive: 1
+--- !u!1 &1665199119486004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4805075226910710}
+  - component: {fileID: 135631684435128564}
+  m_Layer: 0
+  m_Name: ShipCollisionDetection
+  m_TagString: ShipCollisionDetection
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1739445081885766
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +131,6 @@ GameObject:
   - component: {fileID: 54828144540043190}
   - component: {fileID: 114227126105395424}
   - component: {fileID: 114448878114262988}
-  - component: {fileID: 114555917514644180}
   - component: {fileID: 65993368945939178}
   - component: {fileID: 114405609220177208}
   m_Layer: 15
@@ -282,8 +297,22 @@ Transform:
   - {fileID: 4039873669616578}
   - {fileID: 4520651703107934}
   - {fileID: 4307854917272266}
+  - {fileID: 4805075226910710}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4805075226910710
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665199119486004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4650997957762436}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4975622132639878
 Transform:
@@ -677,14 +706,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd27d8a49122c9418c567cafd591a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114555917514644180
-MonoBehaviour:
+--- !u!135 &135631684435128564
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1810696385679652}
+  m_GameObject: {fileID: 1665199119486004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed8bac00fe434b4ba4ae712af45c89b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Radius: 273
+  m_Center: {x: 0, y: 0, z: 0}

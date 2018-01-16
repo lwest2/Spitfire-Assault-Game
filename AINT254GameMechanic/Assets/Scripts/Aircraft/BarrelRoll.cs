@@ -121,8 +121,10 @@ namespace Aircraft
         void ExecuteRoll(float curRotateTemp)
         {           
             Debug.Log(m_curRotate);
+            // rotate amount at desired speed
             m_curRotate = m_rotateAmount * m_rotateSpeed * Time.deltaTime;
             m_rotation = m_curRotate;
+            // rotate
             transform.Rotate(Vector3.forward * curRotateTemp);
         }
     }

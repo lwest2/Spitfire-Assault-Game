@@ -16,6 +16,7 @@ namespace Aircraft
         // Update is called once per frame
         void Update()
         {
+            // controls
             m_inputYaw = -Input.GetAxis("yaw");
             m_inputPitch = Input.GetAxis("pitch");
             m_inputAcceleration = Input.GetButtonDown("a button");

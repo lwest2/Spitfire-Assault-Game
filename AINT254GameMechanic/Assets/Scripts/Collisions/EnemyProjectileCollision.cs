@@ -19,16 +19,19 @@ namespace Aircraft
             if (other.CompareTag("Map"))
             {
                 // play effect
+                // disable
                 gameObject.SetActive(false);
             }
 
             if (other.CompareTag("Player"))
             {
+                // deduct 5 health from player
                 m_playerGUIhelperScript.setPlayerHealth(5f);
             }
 
             if (other.CompareTag("Enemy"))
             {
+                // disable
                 gameObject.SetActive(false);
             }
         }

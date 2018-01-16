@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Aircraft
 {
@@ -16,6 +17,7 @@ namespace Aircraft
 
         private void OnDisable()
         {
+            
             m_playerGUIhelperScript.setPlayerObjectives(1.0f);
         }
         

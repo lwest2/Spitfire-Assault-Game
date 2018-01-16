@@ -34,6 +34,7 @@ namespace Aircraft
 
         void BuildShipSpawnPoints()
         {
+            // randomly place spawn points for ships
             for (int i = 0; i < shipNumber; i++)
             {
                 position = new Vector3(randomNumberArray[i], 27, randomNumberArray[i]);
@@ -44,6 +45,7 @@ namespace Aircraft
 
         void BuildShip()
         {
+            // build ships on spawn locations
             foreach (GameObject shipspawn in shipSpawnList)
             {
                 GameObject ship = Instantiate(shipPrefab, shipspawn.transform);

@@ -16,6 +16,7 @@ public class AircraftProjectileSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // projectiles look towards center of crosshair
         m_transform.LookAt(m_crossSection.transform.position);
 	}
 }

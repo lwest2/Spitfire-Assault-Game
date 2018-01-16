@@ -14,11 +14,14 @@ namespace Aircraft
         private float m_maxSpeed;
         private float m_initialSpeed;
 
+        private AudioSource m_audioSource;
+
         // Use this for initialization
         void Awake()
         {
             aircraftScript = GetComponent<Aircraft>();
             aircraftInput = GetComponent<AircraftInput>();
+            m_audioSource = GetComponent<AudioSource>();
         }
 
         private void FixedUpdate()
@@ -43,6 +46,8 @@ namespace Aircraft
 
         void Accelerating()
         {
+            // increase pitch
+            m_audioSource.pitch += 0.015f;
             // if speed is less or equal to max speed
             if (m_speed <= m_maxSpeed)
             {
@@ -57,11 +62,15 @@ namespace Aircraft
 
             // decrease speed
             m_speed -= m_acceleration;
+            // decrease pitch
+            m_audioSource.pitch -= 0.005f;
 
             // if speed is less than initial speed
             if (m_speed < m_initialSpeed)
             {
                 m_speed = m_initialSpeed;
+                // reset pitch
+                m_audioSource.pitch = 1f;
 
             }
 

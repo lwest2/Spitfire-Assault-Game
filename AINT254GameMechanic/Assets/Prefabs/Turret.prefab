@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 114864958552253370}
   - component: {fileID: 114326608858733564}
   - component: {fileID: 65067814805632706}
+  - component: {fileID: 82131189756590822}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Turret
@@ -553,6 +554,87 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 14.946296, y: 10, z: 19.399773}
   m_Center: {x: -0.048258305, y: 0, z: -0.3001132}
+--- !u!82 &82131189756590822
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334915914702506}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243111095821247058, guid: 096a58187cbb1f8489a9de9169a757ea,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2db598012d320d64583ee8114a1b6d18, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 229
+  DopplerLevel: 2.36
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.751
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.41944444
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1.005
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95878154781322118
 Animator:
   serializedVersion: 3
@@ -587,6 +669,7 @@ MonoBehaviour:
   - {fileID: 4982671848587920}
   - {fileID: 4781402349264832}
   - {fileID: 4431769355993042}
+  m_audioClip: {fileID: 8300000, guid: 2db598012d320d64583ee8114a1b6d18, type: 3}
 --- !u!114 &114089093723595980
 MonoBehaviour:
   m_ObjectHideFlags: 1

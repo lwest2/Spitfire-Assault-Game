@@ -23,6 +23,7 @@ public class AircraftCrossSection : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        // set crosshair transform on the screen
         screenPos = m_camera.WorldToScreenPoint(m_target.position);
         guiPosition = new Vector2(screenPos.x, screenPos.y);
 
